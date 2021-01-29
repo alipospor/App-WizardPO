@@ -8,12 +8,19 @@ const { SpecReporter, StacktraceOption } = require('jasmine-spec-reporter');
  * @type { import("protractor").Config }
  */
 exports.config = {
-  allScriptsTimeout: 11000,
+  allScriptsTimeout: 60000,
   specs: [
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    browserName: 'chrome'
+    browserName: 'chrome',
+    chromeOptions: {
+      args: [
+        '--no-sandbox',
+        '--disable-gpu',
+        '--start-maximized'
+      ]
+    },
   },
   directConnect: true,
   SELENIUM_PROMISE_MANAGER: false,
@@ -22,7 +29,7 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
-    print: function() {}
+    print: function () { }
   },
   onPrepare() {
     require('ts-node').register({
@@ -33,5 +40,5 @@ exports.config = {
         displayStacktrace: StacktraceOption.PRETTY
       }
     }));
-  }
+  },
 };

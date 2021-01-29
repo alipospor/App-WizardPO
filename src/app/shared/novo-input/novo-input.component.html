@@ -1,0 +1,15 @@
+<div class="po-row" style="height: 24px;">
+  <div
+    [ngClass]="{'po-pl-0 po-pr-0': padding}" 
+    class="po-sm-8 po-md-8 font-label-color">
+    {{label}}
+  </div>
+  <po-button 
+      id="novo"
+      [ngClass]="{'po-pl-0 po-pr-0': padding}"
+      class="po-sm-4 po-md-3 button-hack-sticky"
+      (p-click)="emitOpenModal()"
+      p-label="Novo" 
+      p-type="link">
+  </po-button>
+</div>

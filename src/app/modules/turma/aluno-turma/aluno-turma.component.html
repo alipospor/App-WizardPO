@@ -1,0 +1,62 @@
+<div>
+    <article [formGroup]="componentForm">
+        <div class="po-row">
+            <po-multiselect class="po-sm-12 po-md-11" 
+                p-label="Alunos" 
+                name="alunos" 
+                p-sort="true"
+                [p-options]="optionsAlunos" 
+                formControlName="alunos" 
+                p-required>
+            </po-multiselect>
+        </div>
+    </article>
+    <po-divider class="po-mt-5" p-label="Cadastro Aluno"></po-divider>
+    <form [formGroup]="alunoForm">
+        <div class="po-row">
+            <div class="po-md-3">
+                <po-input p-label="Nome" 
+                    formControlName="nome">
+                </po-input>
+            </div>
+            <div class="po-md-3">
+                <po-input p-label="E-mail" 
+                    formControlName="email">
+                </po-input>
+            </div>
+            <div class="po-md-2">
+                <po-input p-label="Cpf" 
+                    formControlName="cpf" 
+                    p-mask="999.999.999-99" 
+                    p-mask-format-model
+                    p-minlength="14"
+                    p-required>
+                </po-input>
+            </div>
+            <div class="po-md-2">
+                <po-input p-label="Matricula" 
+                    formControlName="matricula"
+                    p-optional="true"
+                >
+                </po-input>
+            </div>
+            <div class="po-md-2">
+                <po-select
+                    name="formaIngresso"
+                    p-label="Forma Ingresso"
+                    formControlName="formaIngresso"
+                    p-required
+                    [p-options]="optionsFormaIngresso()"
+                >
+                </po-select>
+            </div>
+        </div>
+        <div class="po-row center-align">
+            <po-button class="po-sm-4" 
+                [p-disabled]="alunoForm.invalid" 
+                p-label="Cadastrar"
+                (p-click)="cadastraAluno()"
+            ></po-button>
+        </div>
+    </form>
+</div>

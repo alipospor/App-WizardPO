@@ -1,0 +1,29 @@
+<po-page-default 
+    [p-title]="titulo"
+    [p-actions]="configuracaoMenuAcoes()">
+
+    <form [formGroup]="form">
+        <po-stepper id="po-stepper" #poStepper
+            (p-change-step)="controlarPasso($event)"
+        >
+            <po-step
+                id="step1"
+                p-label="Turma" 
+                [p-can-active-next-step]="ativaPasso.bind(this, etapaAbertura)">
+                <app-abertura-turma #etapaAbertura [componentForm]="form"></app-abertura-turma>
+            </po-step>
+            <po-step 
+                id="step2"
+                p-label="Disciplina" 
+                [p-can-active-next-step]="ativaPasso.bind(this, etapaDisciplina)">
+                <app-disciplina-turma #etapaDisciplina [componentForm]="form"></app-disciplina-turma>
+            </po-step>
+            <po-step 
+                id="step3"
+                p-label="Aluno">
+                <app-aluno-turma #etapaAluno [componentForm]="form"></app-aluno-turma>
+            </po-step>
+        </po-stepper>
+    </form>
+
+</po-page-default>

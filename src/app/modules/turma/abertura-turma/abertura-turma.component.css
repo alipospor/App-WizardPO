@@ -1,0 +1,15 @@
+.custom-label {
+    font-family: NunitoSans-Bold, sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    color: #4a5c60;
+    display: table-cell;
+    vertical-align: sub;
+    width: 100%;
+}
+
+.center-align {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

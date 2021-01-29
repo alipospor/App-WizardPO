@@ -1,0 +1,58 @@
+<article class="po-mt-5" [formGroup]="componentForm">
+
+    <h3 class="po-mb-4 po-mt-4">Turma</h3>
+
+    <div class="po-row">
+
+        <po-datepicker-range class="po-md-4"
+            p-label="Ano Letivo"
+            formControlName="anoLetivo"
+            [p-literals]="customLiterals"
+            p-no-autocomplete
+            p-required
+        >
+        </po-datepicker-range>
+        <po-number class="po-md-2" 
+            p-label="Periodo Letivo"
+            formControlName="periodoLetivo"
+            p-min="1"
+            p-max="9"
+            p-maxlength="1"
+            p-clean
+            p-required>
+        </po-number>
+        <po-number class="po-md-2" 
+            p-label="N° Vagas"
+            formControlName="numeroVagas"
+            p-min="1"
+            p-maxlength="2"
+            p-max="35"
+            p-clean
+            p-required>
+        </po-number>
+        <po-input class="po-md-4" 
+            p-label="Descrição Turma" 
+            formControlName="descricao" 
+            p-maxlength="40"
+            p-minlength="1"
+            p-error-pattern
+            p-clean
+            p-required>
+        </po-input>
+    </div>
+
+</article>
+
+
+
+
+        <!-- <label class="custom-label ">Ano Letivo</label>
+        <div class="po-row">
+            <po-datepicker class="po-md-2" 
+            p-clean>
+            </po-datepicker>
+
+            <po-datepicker class="po-md-2" 
+            p-clean>
+            </po-datepicker>
+        </div> -->

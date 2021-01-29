@@ -1,0 +1,71 @@
+<div class="po-mt-5">
+    <article  [formGroup]="componentForm">
+
+        <div class="po-row">
+            <div class="po-md-12">
+                <po-multiselect p-label="Disciplina" class="po-sm-12 po-md-11" 
+                    name="disciplinas" 
+                    formControlName="disciplinas"
+                    [p-options]="optionsDisciplina" 
+                    p-required
+                    p-sort="true">
+                </po-multiselect>
+            </div>
+        </div>
+
+    </article>
+    <po-divider class="po-mt-5" p-label="Cadastro Disciplina"></po-divider>
+    <div>
+        <form [formGroup]="disciplinaForm">
+
+            <div class="po-row">
+                <div class="po-md-3">
+                    <po-input p-label="Descrição"
+                        formControlName="descricao"
+                        p-maxlength="30"
+                        p-minlength="8"
+                        p-error-pattern
+                        p-clean
+                        p-required>
+                    </po-input>
+                </div>
+                <div class="po-md-2">
+                    <po-input #siglaInput 
+                        p-label="Sigla"
+                        formControlName="sigla"
+                        p-minlength="1"
+                        p-maxlength="10"
+                        p-clean
+                        p-required>
+                    </po-input>
+                </div>
+                <div class="po-md-3">
+                    <po-number p-label="Carga Horária"
+                        formControlName="cargaHoraria"
+                        p-min="1"
+                        p-maxlength="9999"
+                        p-clean
+                        p-required>
+                    </po-number>
+                </div>
+                <div class="po-md-4">
+                    <app-novo-input label="Professor" padding="true" (openEvent)="abrirModal()"></app-novo-input>
+                    <po-select
+                        formControlName="professor"
+                        [p-options]="optionsProfessor"
+                        p-required>
+                    </po-select>
+                </div>
+            </div>
+            <div class="po-row center-align">
+                <po-button id="inserirDisciplina" class="po-sm-4" 
+                    [p-disabled]="disciplinaForm.invalid" 
+                    p-label="Cadastrar"
+                    (p-click)="cadastraDisciplina()"
+                ></po-button>
+            </div>
+
+        </form>
+    </div>
+        <app-professor-modal #professorModal (callFunction)="prencherOptionsProfessor()"></app-professor-modal>
+</div>

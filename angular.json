@@ -24,6 +24,9 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@po-ui/style/css/po-theme-default.min.css",
+              "./node_modules/@totvs/po-theme/css/po-theme-default-variables.min.css",
+              "./node_modules/@totvs/po-theme/css/po-theme-default.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -87,6 +90,9 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@po-ui/style/css/po-theme-default.min.css",
+              "./node_modules/@totvs/po-theme/css/po-theme-default-variables.min.css",
+              "./node_modules/@totvs/po-theme/css/po-theme-default.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -120,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "wizardPO"
+  "defaultProject": "wizardPO",
+  "cli": {
+    "analytics": "a5282802-8b48-476e-a3a5-4a137bf1d52d"
+  }
 }

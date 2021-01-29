@@ -1,0 +1,47 @@
+<po-modal #professorModal 
+        p-title="Cadastro Professor" 
+        p-click-out="true"
+        p-size="auto"
+        p-hide-close
+        [p-primary-action]="enviarForm"
+        [p-secondary-action]="fecharModal"
+    >
+
+    <form [formGroup]="professorForm">
+        <div class="po-col center-align">
+            <div class="po-row center-align">
+                <po-input p-label="Nome" 
+                    formControlName="nome"
+                    p-required>
+
+                </po-input>
+            </div>
+            <div class="po-row center-align">
+                <po-input p-label="E-mail" 
+                    formControlName="email"
+                    p-required>
+
+                </po-input>
+            </div>
+            <div class="po-row center-align" >
+                <po-input p-label="Cpf"
+                    formControlName="cpf"
+                    p-mask="999.999.999-99"
+                    p-mask-format-model
+                    p-minlength="14"
+                    p-required>
+
+                </po-input>
+            </div>
+            <div class="po-row center-align">
+               <po-select p-label="Titulação"
+                    formControlName="titulacao"
+                    [p-options]="optionsTitulacao"
+                    p-required
+                    >
+                </po-select>
+            </div>
+        </div>
+    </form>
+
+</po-modal>
