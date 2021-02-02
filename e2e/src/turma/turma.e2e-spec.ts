@@ -36,7 +36,7 @@ describe('turma.e2e-spec.ts | TurmaPage', () => {
 
     it('deve permitir cadastrar turma', async () => {
         /* valida a quantidade de etapas */
-        expect(await page.etapas.count()).toEqual(3);
+        expect(await page.etapas.count()).toEqual(4);
 
         //Etapa 1
         expect(await page.etapaTurma.isPresent()).toBeTruthy();
@@ -71,18 +71,20 @@ describe('turma.e2e-spec.ts | TurmaPage', () => {
 
         //Etapa 3
         expect(await page.etapaAluno.isPresent()).toBeTruthy();
+
         await page.preencherMultiSelect({
             elementoPai: page.etapaAluno,
             termo: 'alunos',
             teclas: ['Cha', 'Gar']
         });
-        /* Fim etapa (3) */
+
+        expect(await page.botoesAcao.last().click());
         expect(await page.botoesAcao.last().click());
     });
 
     it('deve permitir cadastrar disciplina', async () => {
         /* valida a quantidade de etapas */
-        expect(await page.etapas.count()).toEqual(3);
+        expect(await page.etapas.count()).toEqual(4);
 
         //Etapa 1
         expect(await page.etapaTurma.isPresent()).toBeTruthy();
@@ -132,7 +134,7 @@ describe('turma.e2e-spec.ts | TurmaPage', () => {
 
     it('deve permitir cadastrar professor', async () => {
         /* valida a quantidade de etapas */
-        expect(await page.etapas.count()).toEqual(3);
+        expect(await page.etapas.count()).toEqual(4);
 
         //Etapa 1
         expect(await page.etapaTurma.isPresent()).toBeTruthy();
@@ -168,29 +170,29 @@ describe('turma.e2e-spec.ts | TurmaPage', () => {
         const professorModal = page.modal.$('.po-modal .po-modal-content');
         expect(await professorModal.isPresent());
 
-        const professorModalTitle = $('.po-modal-header .po-modal-title');
+        const professorModalTitle = professorModal.$('.po-modal-header .po-modal-title');
         expect(await professorModalTitle.getText()).toEqual('Cadastro Professor');
 
         /* Inserção de dados professor */
         const nome = professorModal.$('po-input[formControlName="nome"] input');
         expect(await nome.isPresent()).toBeTruthy();
         await nome.sendKeys('Professor Teste');
-        /* 
-                const email = page.modal.$('po-input [formControlName="email"] input');
-                expect(await email.isPresent()).toBeTruthy();
-                await email.sendKeys('professor@teste.com.br');
-        
-                const cpf = page.modal.$('po-input [formControlName="cpf"] input');
-                expect(await cpf.isPresent()).toBeTruthy();
-                await cpf.sendKeys('000.000.000-00');
-        
-                await page.modal.prencherSelect({
-                    elementoPai: page.modal,
-                    termo: 'titulacao',
-                    teclas: []
-                }); */
 
-        const professorAcoesModal = professorModal.$('.po-modal .po-modal-footer po-button');
+        const email = professorModal.$('po-input[formControlName="email"] input');
+        expect(await email.isPresent()).toBeTruthy();
+        await email.sendKeys('professor@teste.com.br');
+
+        const cpf = professorModal.$('po-input[formControlName="cpf"] input');
+        expect(await cpf.isPresent()).toBeTruthy();
+        await cpf.sendKeys('000.000.000-00');
+
+        await page.prencherSelect({
+            elementoPai: professorModal,
+            termo: 'titulacao',
+            teclas: []
+        });
+
+        const professorAcoesModal = professorModal.$('.po-modal-footer po-button');
         expect(await professorAcoesModal.count()).toEqual(2);
 
         expect(await professorAcoesModal.get(1).getText()).toEqual('Enviar');

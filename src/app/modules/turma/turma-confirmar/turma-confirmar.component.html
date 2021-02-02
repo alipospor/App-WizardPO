@@ -1,0 +1,27 @@
+<div class="po-mt-5">
+    <po-dynamic-view
+        [p-fields]="configuracaoTurmaCampos"
+        p-show-all-value
+        [p-value]="confirmarTurmaCampo"> 
+
+    </po-dynamic-view>
+    <po-divider class=""></po-divider>
+    <po-accordion>
+        <po-accordion-item p-label="Disciplinas">
+            <po-table
+               [p-columns]="configuracaoDisciplinaColunas"
+               [p-items]="confirmarDisciplinasCampos"
+               p-striped="true"
+               >
+            </po-table>
+        </po-accordion-item>
+        <po-accordion-item p-label="Alunos">
+            <po-table
+            [p-columns]="configuracaoAlunoColunas"
+            [p-items]="confirmarAlunosCampos"
+            p-striped="true"
+            >
+         </po-table>
+        </po-accordion-item>
+    </po-accordion>
+</div>

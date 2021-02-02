@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /* Po Ui */
 import { PoModule } from '@po-ui/ng-components';
@@ -20,8 +21,9 @@ import { AppRoutingModule } from './app.routing.module';
     CommonModule,
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     PoModule,
-    
+
     RouterModule.forRoot([]),
     TurmaModule
   ],

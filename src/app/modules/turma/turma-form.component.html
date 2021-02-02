@@ -20,8 +20,14 @@
             </po-step>
             <po-step 
                 id="step3"
-                p-label="Aluno">
+                p-label="Aluno"
+                [p-can-active-next-step]="ativaPasso.bind(this, etapaAluno)">
                 <app-aluno-turma #etapaAluno [componentForm]="form"></app-aluno-turma>
+            </po-step>
+            <po-step 
+                id="step4"
+                p-label="Confirmar">
+                <app-confirmar-turma [stepper]="stepAtual" [componentForm]="form"></app-confirmar-turma>
             </po-step>
         </po-stepper>
     </form>

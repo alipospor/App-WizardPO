@@ -7,10 +7,10 @@ import { FormularioStepBase } from 'src/app/core/components/turma-form/formulari
 
 @Component({
   selector: 'app-abertura-turma',
-  templateUrl: './abertura-turma.component.html',
-  styleUrls: ['./abertura-turma.component.css']
+  templateUrl: './turma-abertura.component.html',
+  styleUrls: ['./turma-abertura.component.css']
 })
-export class AberturaTurmaComponent extends FormularioStepBase implements OnInit {
+export class TurmaAberturaComponent extends FormularioStepBase implements OnInit {
 
   @Input()
   public componentForm: FormGroup;

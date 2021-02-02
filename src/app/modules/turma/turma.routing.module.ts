@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 /* Components */
-import { FormTurmaComponent } from './form-turma.component';
+import { TurmaFormComponent } from './turma-form.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: FormTurmaComponent,
+        component: TurmaFormComponent,
         data: {
             title: 'Abertura Turma'
         }

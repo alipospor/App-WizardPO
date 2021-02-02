@@ -12,7 +12,7 @@ import { Aluno } from 'src/app/core/interfaces/aluno.interface';
 import { Disciplina } from 'src/app/core/interfaces/disciplina.interface';
 
 @Injectable()
-export class FormTurmaService extends BaseHttpService {
+export class TurmaFormService extends BaseHttpService {
 
   protected URL_API = 'http://localhost:3000';
 

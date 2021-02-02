@@ -6,25 +6,25 @@ import { PoMultiselectOption, PoSelectOption } from '@po-ui/ng-components';
 
 /* imports */
 import { FormularioStepBase } from 'src/app/core/components/turma-form/formulario-step-base';
-import { FormTurmaService } from '../form-turma.service';
+import { TurmaFormService } from '../turma-form.service';
 import { FormaIngressoEnum } from 'src/app/core/commons/formaIngresso.enum';
 import { Aluno } from 'src/app/core/interfaces/aluno.interface';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
 
 @Component({
   selector: 'app-aluno-turma',
-  templateUrl: './aluno-turma.component.html',
-  styleUrls: ['./aluno-turma.component.css']
+  templateUrl: './turma-aluno.component.html',
+  styleUrls: ['./turma-aluno.component.css']
 })
-export class AlunoTurmaComponent extends FormularioStepBase implements OnInit {
+export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
 
-  @Input()
-  public componentForm: FormGroup;
+  @Input() public componentForm: FormGroup;
+
   public alunoForm: FormGroup;
   public optionsAlunos: PoMultiselectOption[] = [];
 
   constructor(
-    private formTurmaService: FormTurmaService,
+    private turmaFormService: TurmaFormService,
     private FormBuilder: FormBuilder,
     private notificationHelper: NotificationMessageService
   ) {
@@ -65,7 +65,7 @@ export class AlunoTurmaComponent extends FormularioStepBase implements OnInit {
   }
 
   public prencherOptionsAluno(): void {
-    this.formTurmaService.obterAlunoSemTurma().subscribe(alunos =>
+    this.turmaFormService.obterAlunoSemTurma().subscribe(alunos =>
       this.optionsAlunos = alunos.map(aluno => (
         { value: aluno.id, label: `${aluno.nome} (${aluno.formaIngresso})` }
       ))
@@ -84,7 +84,7 @@ export class AlunoTurmaComponent extends FormularioStepBase implements OnInit {
     if (!matricula) {
       novoAluno.matricula = Math.floor(Math.random() * (Math.ceil(1), Math.ceil(10000)));
     }
-    this.formTurmaService.cadastraAluno(novoAluno)
+    this.turmaFormService.cadastraAluno(novoAluno)
       .subscribe(
         () => {
           this.notificationHelper.mensagemSucesso('Cadastro realizado com sucesso');

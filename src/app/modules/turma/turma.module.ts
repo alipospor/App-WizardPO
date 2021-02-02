@@ -3,12 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /* Po-Ui */
-import { PoButtonGroupModule, PoButtonModule, PoDividerModule, PoDynamicModule, PoFieldModule, PoPageModule, PoStepperModule, PoWidgetModule } from '@po-ui/ng-components';
+import { PoAccordionModule, PoButtonGroupModule, PoButtonModule, PoDividerModule, PoDynamicModule, PoFieldModule, PoPageModule, PoStepperModule, PoTableModule } from '@po-ui/ng-components';
 
 /* Components */
-import { AberturaTurmaComponent } from './abertura-turma/abertura-turma.component';
-import { DisciplinaTurmaComponent } from './disciplina-turma/disciplina-turma.component';
-import { AlunoTurmaComponent } from './aluno-turma/aluno-turma.component';
+import { TurmaAberturaComponent } from './turma-abertura/turma-abertura.component';
+import { TurmaAlunoComponent } from './turma-aluno/turma-aluno.component';
+import { TurmaConfirmarComponent } from './turma-confirmar/turma-confirmar.component';
+import { TurmaDisciplinaComponent } from './turma-disciplina/turma-disciplina.component';
+import { TurmaFormComponent } from './turma-form.component';
 
 /* Modulos */
 import { TurmaRoutingModule } from './turma.routing.module';
@@ -16,15 +18,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ModalsModule } from '../modals/modals.module';
 
 /* Services */
-import { FormTurmaComponent } from './form-turma.component';
-import { FormTurmaService } from './form-turma.service';
+import { TurmaFormService } from './turma-form.service';
 
 @NgModule({
     declarations: [
-        FormTurmaComponent,
-        AberturaTurmaComponent,
-        DisciplinaTurmaComponent,
-        AlunoTurmaComponent
+        TurmaAberturaComponent,
+        TurmaAlunoComponent,
+        TurmaConfirmarComponent,
+        TurmaDisciplinaComponent,
+        TurmaFormComponent
     ],
     imports: [
         FormsModule,
@@ -38,13 +40,15 @@ import { FormTurmaService } from './form-turma.service';
         PoButtonModule,
         PoButtonGroupModule,
         PoDividerModule,
+        PoAccordionModule,
+        PoTableModule,
 
         TurmaRoutingModule,
         SharedModule,
         ModalsModule
     ],
     providers: [
-        FormTurmaService
+        TurmaFormService
     ]
 })
 export class TurmaModule { }

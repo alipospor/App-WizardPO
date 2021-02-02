@@ -7,7 +7,7 @@ import { PoSelectOption } from '@po-ui/ng-components';
 
 /* Imports */
 import { FormularioStepBase } from 'src/app/core/components/turma-form/formulario-step-base';
-import { FormTurmaService } from '../form-turma.service';
+import { TurmaFormService } from '../turma-form.service';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
 
 /* Interface */
@@ -19,10 +19,10 @@ import { ProfessorModalComponent } from '../../modals/professor-modal/professor-
 
 @Component({
   selector: 'app-disciplina-turma',
-  templateUrl: './disciplina-turma.component.html',
-  styleUrls: ['./disciplina-turma.component.css']
+  templateUrl: './turma-disciplina.component.html',
+  styleUrls: ['./turma-disciplina.component.css']
 })
-export class DisciplinaTurmaComponent extends FormularioStepBase implements OnInit {
+export class TurmaDisciplinaComponent extends FormularioStepBase implements OnInit {
 
   @Input()
   public componentForm: FormGroup;
@@ -33,7 +33,7 @@ export class DisciplinaTurmaComponent extends FormularioStepBase implements OnIn
   @ViewChild('professorModal') public professorModal: ProfessorModalComponent;
 
   constructor(
-    private formTurmaService: FormTurmaService,
+    private turmaFormService: TurmaFormService,
     private formBuilder: FormBuilder,
     private notificationHelper: NotificationMessageService
   ) {
@@ -82,8 +82,8 @@ export class DisciplinaTurmaComponent extends FormularioStepBase implements OnIn
 
   public prencherOptionsDisciplina() {
     forkJoin({
-      dadosDisciplina: this.formTurmaService.obterDisciplina(),
-      dadosProfessor: this.formTurmaService.obterProfessor()
+      dadosDisciplina: this.turmaFormService.obterDisciplina(),
+      dadosProfessor: this.turmaFormService.obterProfessor()
     }).subscribe(({ dadosDisciplina, dadosProfessor }) => {
 
       this.optionsDisciplina = dadosDisciplina.map(disciplina => {
@@ -101,7 +101,7 @@ export class DisciplinaTurmaComponent extends FormularioStepBase implements OnIn
   }
 
   public prencherOptionsProfessor() {
-    this.formTurmaService.obterProfessor()
+    this.turmaFormService.obterProfessor()
       .subscribe(professor => {
         this.optionsProfessor = professor.map(professor => (
           { label: professor.nome, value: professor.id }
@@ -112,7 +112,7 @@ export class DisciplinaTurmaComponent extends FormularioStepBase implements OnIn
   public cadastraDisciplina() {
     const novaDisciplina = this.disciplinaForm.getRawValue() as Disciplina;
 
-    this.formTurmaService.cadastraDisciplina(novaDisciplina)
+    this.turmaFormService.cadastraDisciplina(novaDisciplina)
       .subscribe(
         () => {
           this.notificationHelper.mensagemSucesso('Cadastro de disciplina realizado com sucesso')

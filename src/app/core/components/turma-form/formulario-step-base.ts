@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 export class FormularioStepBase {
@@ -5,16 +6,13 @@ export class FormularioStepBase {
     public formGroup: FormGroup;
 
     constructor(
-        protected camposParaValidar: string[]
+        protected camposParaValidar: string[],
     ) { }
 
     public camposValidos() {
-        const validacaoDosCampos = this.validarCampos()
-
+        const validacaoDosCampos = this.validarCampos();
         /* .every() -> testa se todos os elementos do array passam pelo teste */
-        return validacaoDosCampos.every(valido => {
-            return valido == true
-        });
+        return validacaoDosCampos.every(valido => valido);
     }
 
     private validarCampos(): boolean[] {
@@ -22,6 +20,9 @@ export class FormularioStepBase {
         const formGroup = this.formGroup.controls;
 
         return this.camposParaValidar.map(campo => {
+            formGroup[campo].updateValueAndValidity();
+            formGroup[campo].markAsTouched();
+            formGroup[campo].markAsDirty();
 
             return formGroup[campo].valid;
         });

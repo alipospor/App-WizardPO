@@ -1,31 +1,33 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { forkJoin } from 'rxjs';
 
 /* Po-Ui */
 import { PoPageAction, PoStepperComponent } from '@po-ui/ng-components';
-import { concat, forkJoin, of, pipe } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 /* Components */
-import { FormularioBase } from 'src/app/core/components/turma-form/formulario-base';
-import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
 import { Turma } from 'src/app/core/interfaces/turma.interface';
+
+/* Services */
+import { TurmaFormService } from './turma-form.service';
 import { TitleService } from 'src/app/core/services/title.service';
-import { FormTurmaService } from './form-turma.service';
+import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
 
 @Component({
   selector: 'app-turma',
-  templateUrl: './form-turma.component.html',
-  styleUrls: ['./form-turma.component.css']
+  templateUrl: './turma-form.component.html'
 })
-export class FormTurmaComponent extends FormularioBase implements OnInit {
+export class TurmaFormComponent implements OnInit {
 
-  public stepAtual: etapasType = 'step1';
+  @Output() public form: FormGroup;
+
+  @Output() public stepAtual: etapasType = 'step1';
 
   readonly visibilidadeButtonsStepper = {
     step1: { Cancelar: true, Anterior: false, Proximo: true, Salvar: false },
     step2: { Cancelar: true, Anterior: true, Proximo: true, Salvar: false },
-    step3: { Cancelar: true, Anterior: true, Proximo: false, Salvar: true },
+    step3: { Cancelar: true, Anterior: true, Proximo: true, Salvar: false },
+    step4: { Cancelar: true, Anterior: true, Proximo: false, Salvar: true },
   };
 
   @ViewChild('poStepper') private _poStepperComponent: PoStepperComponent;
@@ -36,12 +38,11 @@ export class FormTurmaComponent extends FormularioBase implements OnInit {
   }
 
   constructor(
-    formBuilder: FormBuilder,
-    private formTurmaService: FormTurmaService,
+    private formBuilder: FormBuilder,
+    private turmaFormService: TurmaFormService,
     private notificationHelper: NotificationMessageService,
     private titleService: TitleService
   ) {
-    super(formBuilder);
   }
 
   ngOnInit(): void {
@@ -77,14 +78,14 @@ export class FormTurmaComponent extends FormularioBase implements OnInit {
   }
 
   private cadastra(): void {
-    !this.formValido() ? this.notificationHelper.mensagemDanger('Certifique-se que todos os campos foram preenchidos')
+    !this.form.valid ? this.notificationHelper.mensagemDanger('Certifique-se que todos os campos foram preenchidos')
       : this.efetuaCadastro();
   }
 
   private efetuaCadastro(): void {
     const novaTurma = this.form.getRawValue() as Turma;
 
-    this.formTurmaService.cadastroTurma(novaTurma)
+    this.turmaFormService.cadastroTurma(novaTurma)
       .subscribe(
         (response: Turma) => {
           this.atualizaCadastro(response);
@@ -101,27 +102,25 @@ export class FormTurmaComponent extends FormularioBase implements OnInit {
   private atualizaCadastro(dadosTurma: Turma) {
 
     forkJoin({
-      dadosAlunos: this.formTurmaService.obterAluno(),
-      dadosDisciplina: this.formTurmaService.obterDisciplina()
+      dadosAlunos: this.turmaFormService.obterAluno(),
+      dadosDisciplina: this.turmaFormService.obterDisciplina()
     }).subscribe(({ dadosAlunos, dadosDisciplina }) => {
 
       this.filtrarArrayDeIds(dadosAlunos, dadosTurma.alunos).map(aluno => {
         aluno.turma = dadosTurma.id;
-        this.formTurmaService.atualizaAluno(aluno.id, aluno)
+        this.turmaFormService.atualizaAluno(aluno.id, aluno)
           .subscribe(
-            pipe(
-              delay(200)
-            )
+            () => { },
+            err => { this.notificationHelper.mensagemErro('Ops! algo errado aconteceu com seu cadastro') }
           );
       });
 
       this.filtrarArrayDeIds(dadosDisciplina, dadosTurma.disciplinas).map(disciplina => {
         disciplina.turma.push(dadosTurma.id);
-        this.formTurmaService.atualizaDisciplina(disciplina.id, disciplina)
+        this.turmaFormService.atualizaDisciplina(disciplina.id, disciplina)
           .subscribe(
-            pipe(
-              delay(200)
-            )
+            () => { },
+            err => { this.notificationHelper.mensagemErro('Ops! algo errado aconteceu com seu cadastro') }
           );
       });
     })
@@ -159,14 +158,14 @@ export class FormTurmaComponent extends FormularioBase implements OnInit {
   }
 
   public proximaEtapa(): void {
-    if (this.stepAtual !== 'step3') {
+    if (this.stepAtual !== 'step4') {
       this._poStepperComponent.next();
     }
   }
 
   public configuracaoMenuAcoes(): Array<PoPageAction> {
     return [
-      { label: 'Salvar', action: () => this.cadastra() },
+      { label: 'Salvar', action: () => this.cadastra(), icon: 'po-icon po-icon-ok' },
       { label: 'Proximo', action: () => this.proximaEtapa() },
       { label: 'Anterior', action: () => this.etapaAnterior() },
       { label: 'Cancelar', action: () => this.cacelaCadastro() },

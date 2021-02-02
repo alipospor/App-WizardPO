@@ -9,7 +9,7 @@ import { Turma } from 'src/app/core/interfaces/turma.interface';
 import { TitleService } from 'src/app/core/services/title.service';
 
 /* Service */
-import { FormTurmaService } from '../turma/form-turma.service';
+import { TurmaFormService } from '../turma/turma-form.service';
 
 @Component({
   selector: 'app-inicio',
@@ -36,7 +36,7 @@ export class InicioComponent implements OnInit {
   }
 
   constructor(
-    private formTurmaService: FormTurmaService,
+    private formTurmaService: TurmaFormService,
     private titleService: TitleService
   ) { }
 
