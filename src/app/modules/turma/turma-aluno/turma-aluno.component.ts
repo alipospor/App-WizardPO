@@ -1,8 +1,8 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /* PO UI */
-import { PoMultiselectOption, PoSelectOption } from '@po-ui/ng-components';
+import { PoMultiselectOption, PoPopupAction, PoSelectOption } from '@po-ui/ng-components';
 
 /* imports */
 import { FormularioStepBase } from 'src/app/core/components/turma-form/formulario-step-base';
@@ -22,6 +22,12 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
 
   public alunoForm: FormGroup;
   public optionsAlunos: PoMultiselectOption[] = [];
+
+  @ViewChild('target', { read: ElementRef, static: true }) targetInputRef: ElementRef;
+
+  public acoesPopup: PoPopupAction[] = [{
+    label: 'Gerar Matricula', action: this.gerarMatricula.bind(this)
+  }];
 
   constructor(
     private turmaFormService: TurmaFormService,
@@ -77,12 +83,21 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
       .map(formaIngresso => { return formaIngresso })
   }
 
+  private gerarMatricula(precisaRetorno?: boolean): number {
+    const matricula = Math.floor(Math.random() * (Math.ceil(1), Math.ceil(10000)));
+
+    if (precisaRetorno) {
+      return matricula;
+    }
+    this.alunoForm.controls['matricula'].patchValue(matricula);
+  }
+
   public cadastraAluno(): void {
     let novoAluno = this.alunoForm.getRawValue() as Aluno;
     let matricula = novoAluno.matricula;
 
     if (!matricula) {
-      novoAluno.matricula = Math.floor(Math.random() * (Math.ceil(1), Math.ceil(10000)));
+      novoAluno.matricula = this.gerarMatricula(true);
     }
     this.turmaFormService.cadastraAluno(novoAluno)
       .subscribe(

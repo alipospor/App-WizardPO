@@ -79,7 +79,12 @@ describe('turma.e2e-spec.ts | TurmaPage', () => {
         });
 
         expect(await page.botoesAcao.last().click());
+        expect(await page.botoesAcao.last().getText()).toEqual('Salvar');
         expect(await page.botoesAcao.last().click());
+
+
+        /* Validar os dados da tela de confirmar */
+       /*  const divider =  */
     });
 
     it('deve permitir cadastrar disciplina', async () => {
@@ -103,8 +108,9 @@ describe('turma.e2e-spec.ts | TurmaPage', () => {
         const descricao = page.etapaTurma.$('po-input[formControlName="descricao"] input');
         expect(await descricao.isPresent()).toBeTruthy();
         await descricao.sendKeys('Turma dos Testes');
+
         /* Fim etapa (1) */
-        expect(await page.botoesAcao.get(1).click());
+        expect(await page.botoesAcao.last().click());
 
         //Etapa 2
         expect(await page.etapaDisciplina.isPresent()).toBeTruthy();

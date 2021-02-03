@@ -16,6 +16,7 @@
             p-max="9"
             p-maxlength="1"
             p-clean
+            p-error-pattern="Tente algo entre 1 e 9"
             p-required>
         </po-number>
         <po-number class="po-md-2" 
@@ -25,14 +26,15 @@
             p-maxlength="2"
             p-max="35"
             p-clean
+            p-error-pattern="Tente algo entre 1 e 35"
             p-required>
         </po-number>
         <po-input class="po-md-4" 
             p-label="Descrição Turma" 
             formControlName="descricao" 
             p-maxlength="40"
-            p-minlength="1"
-            p-error-pattern
+            p-minlength="10"
+            p-error-pattern="Mín 10 Caracteres"
             p-clean
             p-required>
         </po-input>

@@ -6,7 +6,7 @@
                 name="alunos" 
                 p-sort="true"
                 [p-options]="optionsAlunos" 
-                formControlName="alunos" 
+                formControlName="alunos"
                 p-required>
             </po-multiselect>
         </div>
@@ -15,17 +15,23 @@
     <form [formGroup]="alunoForm">
         <div class="po-row">
             <div class="po-md-3">
-                <po-input p-label="Nome" 
-                    formControlName="nome">
+                <po-input p-label="Nome"
+                    formControlName="nome"
+                    p-minlength="10"
+                    p-maxlength="40"
+                    p-required
+                    p-error-pattern="Mín 10 caracteres">
                 </po-input>
             </div>
             <div class="po-md-3">
-                <po-input p-label="E-mail" 
-                    formControlName="email">
-                </po-input>
+                <po-email 
+                    p-label="E-mail" 
+                    formControlName="email"
+                    p-required>
+                </po-email>
             </div>
             <div class="po-md-2">
-                <po-input p-label="Cpf" 
+                <po-input p-label="CPF" 
                     formControlName="cpf" 
                     p-mask="999.999.999-99" 
                     p-mask-format-model
@@ -33,12 +39,18 @@
                     p-required>
                 </po-input>
             </div>
-            <div class="po-md-2">
-                <po-input p-label="Matricula" 
+            <div class="po-md-2" #target>
+                <po-number p-label="Matricula" 
                     formControlName="matricula"
+                    (p-enter)="popup.toggle()"
                     p-optional="true"
                 >
-                </po-input>
+                </po-number>
+                <po-popup #popup 
+                    [p-actions]="acoesPopup"
+                    [p-target]="targetInputRef"
+                    p-position="bottom">  
+                </po-popup>
             </div>
             <div class="po-md-2">
                 <po-select

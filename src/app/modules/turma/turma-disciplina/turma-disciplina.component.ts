@@ -1,9 +1,9 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 
 /* PO UI */
-import { PoSelectOption } from '@po-ui/ng-components';
+import { PoPopupAction, PoSelectOption } from '@po-ui/ng-components';
 
 /* Imports */
 import { FormularioStepBase } from 'src/app/core/components/turma-form/formulario-step-base';
@@ -32,6 +32,12 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
 
   @ViewChild('professorModal') public professorModal: ProfessorModalComponent;
 
+  @ViewChild('target', { read: ElementRef, static: true }) targetInputRef: ElementRef;
+
+  public acoesPopup: PoPopupAction[] = [{
+    label: 'Gerar Sigla', action: this.gerarSiglaDisciplina.bind(this)
+  }];
+
   constructor(
     private turmaFormService: TurmaFormService,
     private formBuilder: FormBuilder,
@@ -58,12 +64,7 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
           Validators.maxLength(30)
         ]
       ],
-      sigla: ['',
-        [
-          Validators.required,
-          Validators.maxLength(10)
-        ]
-      ],
+      sigla: ['', []],
       cargaHoraria: ['', Validators.required],
       professor: [undefined, Validators.required],
       turma: [[]]
@@ -109,9 +110,23 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
       })
   }
 
-  public cadastraDisciplina() {
-    const novaDisciplina = this.disciplinaForm.getRawValue() as Disciplina;
+  private gerarSiglaDisciplina(precisaRetorno?: boolean): string {
+    const novaSigla = this.disciplinaForm.controls['descricao']
+      .value.substring(0, 3).toUpperCase();
 
+    if (precisaRetorno) {
+      return novaSigla;
+    } else {
+      this.disciplinaForm.controls['sigla'].patchValue(novaSigla);
+    }
+  }
+
+  public cadastraDisciplina() {
+    let novaDisciplina = this.disciplinaForm.getRawValue() as Disciplina;
+
+    if (!novaDisciplina.sigla.length) {
+      novaDisciplina.sigla = this.gerarSiglaDisciplina(true);
+    }
     this.turmaFormService.cadastraDisciplina(novaDisciplina)
       .subscribe(
         () => {

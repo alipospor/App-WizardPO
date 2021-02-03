@@ -1,0 +1,166 @@
+{
+  "professores": [
+    {
+      "nome": "Chimbinha Rose",
+      "email": "chimbinha@professor.com.br",
+      "cpf": "000.000.000-01",
+      "titulacao": "GRADUAÇÃO",
+      "id": 1
+    },
+    {
+      "nome": "Albert Einstein",
+      "email": "albert@professor.com.br",
+      "cpf": "000.000.000-02",
+      "titulacao": "ESPECIALIZAÇÃO",
+      "id": 2
+    },
+    {
+      "nome": "Professor Pasquale",
+      "email": "pasquale@professor.com.br",
+      "cpf": "000.000.000-03",
+      "titulacao": "DOUTOR",
+      "id": 3
+    },
+    {
+      "nome": "Marli dos Santos",
+      "email": "marli_s@professor.com",
+      "cpf": "989.898.989-89",
+      "titulacao": "MESTRE",
+      "id": 4
+    },
+    {
+      "nome": "Josue Reis",
+      "email": "josue@p.com",
+      "cpf": "000.000.000-09",
+      "titulacao": "ESPECIALIZAÇÃO",
+      "id": 5
+    },
+    {
+      "nome": "Professor numero 1",
+      "email": "Profe@com.br",
+      "cpf": "111.111.111-11",
+      "titulacao": "DOUTOR",
+      "id": 6
+    }
+  ],
+  "alunos": [
+    {
+      "nome": "João Frango",
+      "email": "j_frango@aluno.com",
+      "cpf": "000.000.000-10",
+      "matricula": 1001,
+      "formaIngresso": "ENADE",
+      "turma": 1,
+      "id": 1
+    },
+    {
+      "nome": "Alisson Cleverson",
+      "email": "ali_cleverson@hotmailcom",
+      "cpf": "077.603.609-05",
+      "matricula": "1003",
+      "formaIngresso": "VESTIBULAR",
+      "turma": "null",
+      "id": 3
+    },
+    {
+      "nome": "Alisson Pospor",
+      "email": "ali_pospor@hotmail.com",
+      "cpf": "077.630.609-05",
+      "matricula": 2477,
+      "formaIngresso": "ENEM",
+      "turma": 1,
+      "id": 4
+    },
+    {
+      "nome": "Garrafinha",
+      "email": "garrafinha@aluno.com.br",
+      "cpf": "000.000.000-00",
+      "matricula": 9177,
+      "formaIngresso": "VESTIBULAR",
+      "turma": "null",
+      "id": 7
+    },
+    {
+      "nome": "Chaveirinho",
+      "email": "chaveirinho@aluno.com.br",
+      "cpf": "000.000.000-00",
+      "matricula": 9036,
+      "formaIngresso": "ENEM",
+      "turma": "null",
+      "id": 8
+    }
+  ],
+  "disciplinas": [
+    {
+      "descricao": "Biologia",
+      "sigla": "BIO",
+      "cargaHoraria": 2,
+      "professor": 2,
+      "turma": [
+        1,
+        2
+      ],
+      "id": 1
+    },
+    {
+      "descricao": "Geografia",
+      "sigla": "GEO",
+      "cargaHoraria": 4,
+      "professor": 4,
+      "turma": [
+        1
+      ],
+      "id": 2
+    },
+    {
+      "descricao": "Português",
+      "sigla": "POR",
+      "cargaHoraria": 6,
+      "professor": 3,
+      "turma": [
+        1,
+        2
+      ],
+      "id": 3
+    },
+    {
+      "descricao": "Música",
+      "sigla": "MUS",
+      "cargaHoraria": 3,
+      "professor": 1,
+      "turma": [
+        1
+      ],
+      "id": 4
+    },
+    {
+      "descricao": "Descriptopn",
+      "sigla": "DESC",
+      "cargaHoraria": 123,
+      "professor": 6,
+      "turma": [],
+      "id": 5
+    }
+  ],
+  "turmas": [
+    {
+      "descricao": "Turma Inauguração",
+      "anoLetivo": {
+        "start": "2021-01-01",
+        "end": "2021-12-12"
+      },
+      "periodoLetivo": 2,
+      "numeroVagas": 2,
+      "disciplinas": [
+        5,
+        2,
+        4
+      ],
+      "alunos": [
+        1,
+        7
+      ],
+      "id": 1
+    }
+  ]
+}

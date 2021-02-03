@@ -24,27 +24,37 @@
                         formControlName="descricao"
                         p-maxlength="30"
                         p-minlength="8"
-                        p-error-pattern
                         p-clean
+                        p-error-pattern="Mín 8 caracteres"
                         p-required>
                     </po-input>
                 </div>
-                <div class="po-md-2">
-                    <po-input #siglaInput 
+                <div class="po-md-2" #target>
+                    <po-input #inputSigla
                         p-label="Sigla"
                         formControlName="sigla"
-                        p-minlength="1"
+                        p-minlength="3"
                         p-maxlength="10"
+                        (p-enter)="popup.toggle()"
                         p-clean
-                        p-required>
+                        p-error-pattern="Mín 3 caracteres"
+                        p-optional="true">
                     </po-input>
+                    <po-popup #popup 
+                    [p-actions]="acoesPopup"
+                    [p-target]="targetInputRef"
+                    p-position="bottom"
+                    >
+                    </po-popup>
                 </div>
                 <div class="po-md-3">
                     <po-number p-label="Carga Horária"
                         formControlName="cargaHoraria"
                         p-min="1"
-                        p-maxlength="9999"
+                        p-maxlength="4"
+                        p-max="9999"
                         p-clean
+                        p-error-pattern="Mín 1 caractere"
                         p-required>
                     </po-number>
                 </div>
@@ -53,6 +63,7 @@
                     <po-select
                         formControlName="professor"
                         [p-options]="optionsProfessor"
+                        p-error-pattern="Selecione um professor"
                         p-required>
                     </po-select>
                 </div>

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { forkJoin } from 'rxjs';
+import { forkJoin, interval, of, pipe } from 'rxjs';
 
 /* Po-Ui */
 import { PoPageAction, PoStepperComponent } from '@po-ui/ng-components';
@@ -12,6 +12,7 @@ import { Turma } from 'src/app/core/interfaces/turma.interface';
 import { TurmaFormService } from './turma-form.service';
 import { TitleService } from 'src/app/core/services/title.service';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
+import { concatMap, delay, map, mergeAll, mergeMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-turma',
@@ -99,8 +100,7 @@ export class TurmaFormComponent implements OnInit {
       );
   }
 
-  private atualizaCadastro(dadosTurma: Turma) {
-
+  private atualizaCadastro(dadosTurma: Turma): void {
     forkJoin({
       dadosAlunos: this.turmaFormService.obterAluno(),
       dadosDisciplina: this.turmaFormService.obterDisciplina()
@@ -108,22 +108,25 @@ export class TurmaFormComponent implements OnInit {
 
       this.filtrarArrayDeIds(dadosAlunos, dadosTurma.alunos).map(aluno => {
         aluno.turma = dadosTurma.id;
-        this.turmaFormService.atualizaAluno(aluno.id, aluno)
-          .subscribe(
-            () => { },
-            err => { this.notificationHelper.mensagemErro('Ops! algo errado aconteceu com seu cadastro') }
-          );
-      });
+        this.turmaFormService.atualizaAluno(aluno.id, aluno).pipe(
+          delay(350)
+        ).subscribe(
+          () => { },
+          err => { this.notificationHelper.mensagemErro('Ops! algo errado aconteceu com seu cadastro') }
+        )
+      })
 
       this.filtrarArrayDeIds(dadosDisciplina, dadosTurma.disciplinas).map(disciplina => {
         disciplina.turma.push(dadosTurma.id);
-        this.turmaFormService.atualizaDisciplina(disciplina.id, disciplina)
-          .subscribe(
-            () => { },
-            err => { this.notificationHelper.mensagemErro('Ops! algo errado aconteceu com seu cadastro') }
-          );
+        this.turmaFormService.atualizaDisciplina(disciplina.id, disciplina).pipe(
+          delay(350)
+        ).subscribe(
+          () => { },
+          err => { this.notificationHelper.mensagemErro('Ops! algo errado aconteceu com seu cadastro') }
+        );
       });
-    })
+
+    });
   }
 
   private filtrarArrayDeIds(arrayReturn: any[], arrayWithId: number[]): any[] {

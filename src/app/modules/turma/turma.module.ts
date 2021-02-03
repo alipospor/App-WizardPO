@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /* Po-Ui */
-import { PoAccordionModule, PoButtonGroupModule, PoButtonModule, PoDividerModule, PoDynamicModule, PoFieldModule, PoPageModule, PoStepperModule, PoTableModule } from '@po-ui/ng-components';
+import { PoAccordionModule, PoButtonGroupModule, PoButtonModule, PoDividerModule, PoDynamicModule, PoFieldModule, PoPageModule, PoPopupModule, PoStepperModule, PoTableModule } from '@po-ui/ng-components';
 
 /* Components */
 import { TurmaAberturaComponent } from './turma-abertura/turma-abertura.component';
@@ -42,6 +42,7 @@ import { TurmaFormService } from './turma-form.service';
         PoDividerModule,
         PoAccordionModule,
         PoTableModule,
+        PoPopupModule,
 
         TurmaRoutingModule,
         SharedModule,
