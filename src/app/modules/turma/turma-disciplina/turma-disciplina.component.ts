@@ -110,15 +110,14 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
       })
   }
 
-  private gerarSiglaDisciplina(precisaRetorno?: boolean): string {
+  private gerarSiglaDisciplina(precisaRetorno: boolean = false): string {
     const novaSigla = this.disciplinaForm.controls['descricao']
       .value.substring(0, 3).toUpperCase();
 
-    if (precisaRetorno) {
+    if (precisaRetorno == true) {
       return novaSigla;
-    } else {
-      this.disciplinaForm.controls['sigla'].patchValue(novaSigla);
     }
+    this.disciplinaForm.controls['sigla'].patchValue(novaSigla);
   }
 
   public cadastraDisciplina() {

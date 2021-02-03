@@ -83,10 +83,10 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
       .map(formaIngresso => { return formaIngresso })
   }
 
-  private gerarMatricula(precisaRetorno?: boolean): number {
+  private gerarMatricula(precisaRetorno: boolean = false): number {
     const matricula = Math.floor(Math.random() * (Math.ceil(1), Math.ceil(10000)));
 
-    if (precisaRetorno) {
+    if (precisaRetorno == true) {
       return matricula;
     }
     this.alunoForm.controls['matricula'].patchValue(matricula);
