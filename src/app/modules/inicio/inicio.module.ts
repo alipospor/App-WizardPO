@@ -7,9 +7,9 @@ import { PoPageModule, PoTableModule } from '@po-ui/ng-components';
 /* Components */
 import { InicioComponent } from './inicio.component';
 import { InicioRoutingModule } from './inicio.routing.module';
+import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
 
 /* Services */
-import { TurmaFormService } from '../turma/turma-form.service';
 
 
 @NgModule({

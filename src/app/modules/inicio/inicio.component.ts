@@ -5,11 +5,10 @@ import { PoTableColumn } from '@po-ui/ng-components';
 import { TurmaTabela } from 'src/app/core/interfaces/tabela/turma-tabela.interface';
 
 /* Interface */
-import { Turma } from 'src/app/core/interfaces/turma.interface';
 import { TitleService } from 'src/app/core/services/title.service';
 
 /* Service */
-import { TurmaFormService } from '../turma/turma-form.service';
+import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
 
 @Component({
   selector: 'app-inicio',
@@ -18,7 +17,7 @@ import { TurmaFormService } from '../turma/turma-form.service';
 })
 export class InicioComponent implements OnInit {
 
-  public itensListaTurma: TurmaTabela[] = [];
+  public itensListaTurma: TurmaTabela[] = []; 
 
   public readonly colunasTurma: PoTableColumn[] = [
     { property: 'id', label: 'Id', type: 'number' },

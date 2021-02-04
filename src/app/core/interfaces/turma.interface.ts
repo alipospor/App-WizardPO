@@ -10,5 +10,3 @@ export interface Turma {
     alunos: number[],
     id?: number
 }
-/* Uma turma é formada por vários alunos e várias disciplinas,
-possui um ano e período letivo e um número limitado de vagas.  */

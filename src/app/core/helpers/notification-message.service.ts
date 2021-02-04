@@ -33,7 +33,6 @@ export class NotificationMessageService {
     this.poNotification.information(configuracao);
   }
 
-  //Retorna as configurações da minha notificação \o/
   private configuracaoNotificacao(mensagem: string) {
     const config: PoNotification = {
       message: mensagem,
