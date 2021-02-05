@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
+import { DetectorTelaModule } from './components/detector-tela/detector-tela.module';
 
 /* imports */
 import { FormularioStepBase } from './components/turma-form/formulario-step-base';
 
 @NgModule({
     declarations: [
-        FormularioStepBase
+        FormularioStepBase,
+        DetectorTelaModule
     ],
-    imports: [
-
-    ],
-    exports: [
-        
-    ]
+    imports: [],
+    exports: []
 })
 export class CoreModule { }

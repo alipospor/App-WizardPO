@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -13,7 +13,9 @@ import { Turma } from 'src/app/core/interfaces/turma.interface';
 import { TurmaFormService } from '../../core/services/http/turma-form.service';
 import { TitleService } from 'src/app/core/services/title.service';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
-import { ListService } from 'src/app/core/services/http/list/list.service';
+import { ListService } from 'src/app/core/services/list/list.service';
+import { etapasType } from 'src/app/core/commons/types/etapas.type';
+import { orientacaoStepper } from 'src/app/core/commons/types/orientacaoStepper.type';
 
 @Component({
   selector: 'app-turma',
@@ -22,8 +24,8 @@ import { ListService } from 'src/app/core/services/http/list/list.service';
 export class TurmaFormComponent implements OnInit {
 
   @Output() public form: FormGroup;
-
   @Output() public stepAtual: etapasType = 'step1';
+  public orientacaoStepper: orientacaoStepper = 'horizontal';
 
   readonly visibilidadeButtonsStepper = {
     step1: { Cancelar: true, Anterior: false, Proximo: true, Salvar: false },
@@ -179,17 +181,15 @@ export class TurmaFormComponent implements OnInit {
           return this.form.controls[campo].valid
         }).every(valido => valido);
       case 'step2':
-        return this.form.controls['disciplinas'].valid ? false : true;
+        return !this.form.controls['disciplinas'].valid;
       case 'step3':
-        return this.form.controls['alunos'].valid ? false : true;
+        return !this.form.controls['alunos'].valid;
       default:
         return false;
     }
   }
 
   private disableBotaoSalvar(): boolean {
-    return (this.form.invalid) ? true : false;
+    return this.form.invalid;
   }
 }
-
-type etapasType = 'step1' | 'step2' | 'step3' | 'step4';

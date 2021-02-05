@@ -19,6 +19,7 @@ import { ModalsModule } from '../modals/modals.module';
 
 /* Services */
 import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
+import { DetectorTelaModule } from 'src/app/core/components/detector-tela/detector-tela.module';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { TurmaFormService } from 'src/app/core/services/http/turma-form.service'
 
         TurmaRoutingModule,
         SharedModule,
-        ModalsModule
+        ModalsModule,
+        DetectorTelaModule
     ],
     providers: [
         TurmaFormService

@@ -34,13 +34,6 @@
       "cpf": "000.000.000-09",
       "titulacao": "ESPECIALIZAÇÃO",
       "id": 5
-    },
-    {
-      "nome": "Professor numero 1",
-      "email": "Profe@com.br",
-      "cpf": "111.111.111-11",
-      "titulacao": "DOUTOR",
-      "id": 6
     }
   ],
   "alunos": [
@@ -132,14 +125,6 @@
         1
       ],
       "id": 4
-    },
-    {
-      "descricao": "Descriptopn",
-      "sigla": "DESC",
-      "cargaHoraria": 123,
-      "professor": 6,
-      "turma": [],
-      "id": 5
     }
   ],
   "turmas": [

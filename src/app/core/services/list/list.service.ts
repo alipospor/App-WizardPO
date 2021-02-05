@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Aluno } from 'src/app/core/interfaces/aluno.interface';
 import { Disciplina } from 'src/app/core/interfaces/disciplina.interface';
 import { Professor } from 'src/app/core/interfaces/professor.interface';
-import { TurmaFormService } from '../turma-form.service';
+import { TurmaFormService } from '../http/turma-form.service';
 
 @Injectable({
   providedIn: 'root'
