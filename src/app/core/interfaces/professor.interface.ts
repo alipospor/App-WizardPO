@@ -5,4 +5,3 @@ export interface Professor {
     titulacao: string,
     id?: number,
 }
-/* Um professor possui titulação (mestre, doutor, PHD). */

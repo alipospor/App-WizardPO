@@ -7,7 +7,6 @@ import { PoPopupAction, PoSelectOption } from '@po-ui/ng-components';
 
 /* Imports */
 import { FormularioStepBase } from 'src/app/core/components/turma-form/formulario-step-base';
-import { TurmaFormService } from '../turma-form.service';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
 
 /* Interface */
@@ -16,6 +15,7 @@ import { Professor } from 'src/app/core/interfaces/professor.interface';
 
 /* Modal */
 import { ProfessorModalComponent } from '../../modals/professor-modal/professor-modal.component';
+import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
 
 @Component({
   selector: 'app-disciplina-turma',
@@ -55,7 +55,7 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
     this.geraFormDisciplina();
   }
 
-  private geraFormDisciplina() {
+  private geraFormDisciplina(): void {
     this.disciplinaForm = this.formBuilder.group({
       descricao: ['',
         [
@@ -71,17 +71,18 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
     });
   }
 
-  private limpaFormDisciplina() {
+  private limpaFormDisciplina(): void {
     this.disciplinaForm.patchValue({
       descricao: '',
       sigla: '',
       cargaHoraria: '',
       professor: undefined,
       turma: []
-    })
+    });
+    this.disciplinaForm.reset();
   }
 
-  public prencherOptionsDisciplina() {
+  public prencherOptionsDisciplina(): void {
     forkJoin({
       dadosDisciplina: this.turmaFormService.obterDisciplina(),
       dadosProfessor: this.turmaFormService.obterProfessor()
@@ -101,7 +102,7 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
     })
   }
 
-  public prencherOptionsProfessor() {
+  public prencherOptionsProfessor(): void {
     this.turmaFormService.obterProfessor()
       .subscribe(professor => {
         this.optionsProfessor = professor.map(professor => (
@@ -120,7 +121,7 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
     this.disciplinaForm.controls['sigla'].patchValue(novaSigla);
   }
 
-  public cadastraDisciplina() {
+  public cadastraDisciplina(): void {
     let novaDisciplina = this.disciplinaForm.getRawValue() as Disciplina;
 
     if (!novaDisciplina.sigla.length) {
@@ -137,8 +138,7 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
       )
   }
 
-  /* Function abrir modal */
-  public abrirModal() {
+  public abrirModal(): void {
     this.professorModal.openModal();
   }
 

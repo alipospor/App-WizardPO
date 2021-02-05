@@ -1,18 +1,19 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { forkJoin, interval, of, pipe } from 'rxjs';
+import { forkJoin } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 /* Po-Ui */
 import { PoPageAction, PoStepperComponent } from '@po-ui/ng-components';
 
-/* Components */
+/* Interface */
 import { Turma } from 'src/app/core/interfaces/turma.interface';
 
 /* Services */
-import { TurmaFormService } from './turma-form.service';
+import { TurmaFormService } from '../../core/services/http/turma-form.service';
 import { TitleService } from 'src/app/core/services/title.service';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
-import { concatMap, delay, map, mergeAll, mergeMap, take } from 'rxjs/operators';
+import { ListService } from 'src/app/core/services/http/list/list.service';
 
 @Component({
   selector: 'app-turma',
@@ -33,7 +34,6 @@ export class TurmaFormComponent implements OnInit {
 
   @ViewChild('poStepper') private _poStepperComponent: PoStepperComponent;
 
-  /* PO page default title */
   public get titulo(): string {
     return this.titleService.title;
   }
@@ -42,7 +42,8 @@ export class TurmaFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private turmaFormService: TurmaFormService,
     private notificationHelper: NotificationMessageService,
-    private titleService: TitleService
+    private titleService: TitleService,
+    private listService: ListService
   ) {
   }
 
@@ -67,7 +68,7 @@ export class TurmaFormComponent implements OnInit {
     });
   }
 
-  private limpaCadastro(): void {
+  private limpaFormCadastro(): void {
     this.form.patchValue({
       descricao: '',
       anoLetivo: '',
@@ -76,10 +77,11 @@ export class TurmaFormComponent implements OnInit {
       disciplinas: undefined,
       alunos: undefined
     });
+    this.form.reset();
   }
 
   private cadastra(): void {
-    !this.form.valid ? this.notificationHelper.mensagemDanger('Certifique-se que todos os campos foram preenchidos')
+    (!this.form.valid) ? this.notificationHelper.mensagemDanger('Certifique-se que todos os campos foram preenchidos')
       : this.efetuaCadastro();
   }
 
@@ -106,7 +108,7 @@ export class TurmaFormComponent implements OnInit {
       dadosDisciplina: this.turmaFormService.obterDisciplina()
     }).subscribe(({ dadosAlunos, dadosDisciplina }) => {
 
-      this.filtrarArrayDeIds(dadosAlunos, dadosTurma.alunos).map(aluno => {
+      this.listService.filtrarAlunos(dadosAlunos, dadosTurma.alunos).map(aluno => {
         aluno.turma = dadosTurma.id;
         this.turmaFormService.atualizaAluno(aluno.id, aluno).pipe(
           delay(350)
@@ -116,7 +118,7 @@ export class TurmaFormComponent implements OnInit {
         )
       })
 
-      this.filtrarArrayDeIds(dadosDisciplina, dadosTurma.disciplinas).map(disciplina => {
+      this.listService.filtrarDisciplinas(dadosDisciplina, dadosTurma.disciplinas).map(disciplina => {
         disciplina.turma.push(dadosTurma.id);
         this.turmaFormService.atualizaDisciplina(disciplina.id, disciplina).pipe(
           delay(350)
@@ -129,17 +131,9 @@ export class TurmaFormComponent implements OnInit {
     });
   }
 
-  private filtrarArrayDeIds(arrayReturn: any[], arrayWithId: number[]): any[] {
-    return arrayReturn.filter(element => {
-      if ((arrayWithId.find(id => id == element.id))) {
-        return element;
-      }
-    });
-  }
-
   private cacelaCadastro(): void {
     this.stepAtual = 'step1';
-    this.limpaCadastro();
+    this.limpaFormCadastro();
     this._poStepperComponent.first();
   }
 
@@ -168,12 +162,33 @@ export class TurmaFormComponent implements OnInit {
 
   public configuracaoMenuAcoes(): Array<PoPageAction> {
     return [
-      { label: 'Salvar', action: () => this.cadastra(), icon: 'po-icon po-icon-ok' },
-      { label: 'Proximo', action: () => this.proximaEtapa() },
+      { label: 'Salvar', action: () => this.cadastra(), icon: 'po-icon po-icon-ok', disabled: this.disableBotaoSalvar.bind(this) },
+      { label: 'Proximo', action: () => this.proximaEtapa(), disabled: this.disableBotaoProximo.bind(this) },
       { label: 'Anterior', action: () => this.etapaAnterior() },
       { label: 'Cancelar', action: () => this.cacelaCadastro() },
     ].filter((action) => this.visibilidadeButtonsStepper[this.stepAtual][action.label]);
 
+  }
+
+  private disableBotaoProximo(): boolean {
+    switch (this.stepAtual) {
+      case 'step1':
+        const camposEtapa = ['descricao', 'anoLetivo', 'periodoLetivo', 'numeroVagas'];
+        return !camposEtapa.map(campo => {
+          /*   return ; */
+          return this.form.controls[campo].valid
+        }).every(valido => valido);
+      case 'step2':
+        return this.form.controls['disciplinas'].valid ? false : true;
+      case 'step3':
+        return this.form.controls['alunos'].valid ? false : true;
+      default:
+        return false;
+    }
+  }
+
+  private disableBotaoSalvar(): boolean {
+    return (this.form.invalid) ? true : false;
   }
 }
 

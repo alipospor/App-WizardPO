@@ -5,12 +5,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PoModalAction, PoModalComponent, PoSelectOption } from '@po-ui/ng-components';
 
 /* Services */
-import { ModalsService } from '../modals.service';
+import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
 
 /* Interface */
 import { Professor } from 'src/app/core/interfaces/professor.interface';
-import { TitulacaoEnum } from 'src/app/core/commons/titulacao.enum';
+import { TitulacaoEnum } from 'src/app/core/commons/enums/titulacao.enum';
 
 @Component({
   selector: 'app-professor-modal',
@@ -26,7 +26,7 @@ export class ProfessorModalComponent implements OnInit {
   @ViewChild('professorModal') private _poModal: PoModalComponent;
 
   constructor(
-    private modalService: ModalsService,
+    private turmaFormService: TurmaFormService,
     private formBuilder: FormBuilder,
     public notificationHelper: NotificationMessageService
   ) { }
@@ -52,30 +52,23 @@ export class ProfessorModalComponent implements OnInit {
           Validators.minLength(14)
         ]
       ],
-      titulacao: ['',
-        [
-          Validators.required,
-        ]
-      ]
+      titulacao: [undefined, [Validators.required]]
     });
   }
 
   public validaForm(): void {
-    if (this.professorForm.invalid) {
-      this.notificationHelper.mensagemDanger('Formulário inválido');
-    } else {
-      this.cadastraNovoProfessor();
-    }
+    this.professorForm.invalid ? this.notificationHelper.mensagemDanger('Formulário inválido')
+      : this.cadastraNovoProfessor();
   }
 
   public cadastraNovoProfessor(): void {
     const novoProfessor = this.professorForm.getRawValue() as Professor;
 
-    this.modalService.cadastraProfessor(novoProfessor)
+    this.turmaFormService.cadastraProfessor(novoProfessor)
       .subscribe(
         () => {
           this.notificationHelper.mensagemSucesso('Cadastro realizado com sucesso');
-          this.professorForm.reset();
+          this.limpaFormProfessor();
           this.callFunction.emit();
         },
         err => {
@@ -83,6 +76,16 @@ export class ProfessorModalComponent implements OnInit {
           console.log(err);
         }
       )
+  }
+
+  private limpaFormProfessor() {
+    this.professorForm.patchValue({
+      nome: '',
+      email: '',
+      cpf: '',
+      titulacao: undefined,
+    });
+    this.professorForm.reset();
   }
 
   public prencherOptionsTitulacao(): void {

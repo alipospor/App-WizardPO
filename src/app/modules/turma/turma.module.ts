@@ -18,7 +18,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ModalsModule } from '../modals/modals.module';
 
 /* Services */
-import { TurmaFormService } from './turma-form.service';
+import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
 
 @NgModule({
     declarations: [

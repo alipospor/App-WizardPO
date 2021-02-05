@@ -11,7 +11,8 @@ import { Disciplina } from 'src/app/core/interfaces/disciplina.interface';
 import { Turma } from 'src/app/core/interfaces/turma.interface';
 
 /* Services */
-import { TurmaFormService } from '../turma-form.service';
+import { TurmaFormService } from '../../../core/services/http/turma-form.service';
+import { ListService } from 'src/app/core/services/http/list/list.service';
 
 @Component({
   selector: 'app-confirmar-turma',
@@ -50,7 +51,8 @@ export class TurmaConfirmarComponent implements OnChanges {
   @Input() public componentForm: FormGroup;
 
   constructor(
-    private turmaFormService: TurmaFormService
+    private turmaFormService: TurmaFormService,
+    private listService: ListService
   ) {
   }
 
@@ -59,7 +61,7 @@ export class TurmaConfirmarComponent implements OnChanges {
       (this.stepper == 'step4') ? this.prencherCamposView() : null;
   }
 
-  private prencherCamposView() {
+  private prencherCamposView(): void {
     const novaTurma = this.componentForm.getRawValue() as Turma;
 
     this.confirmarTurmaCampo = {
@@ -79,12 +81,12 @@ export class TurmaConfirmarComponent implements OnChanges {
     return `${inicio.toLocaleDateString()} até ${final.toLocaleDateString()}`;
   }
 
-  private prencherDisciplinasTabela(novaTurma: Turma) {
+  private prencherDisciplinasTabela(novaTurma: Turma): void {
     this.confirmarDisciplinasCampos = [];
 
     this.turmaFormService.obterDisciplina().subscribe(
       pipe((response: Disciplina[]) => {
-        this.filtrarArray(response, novaTurma.disciplinas).map(disciplina => {
+        this.listService.filtrarDisciplinas(response, novaTurma.disciplinas).map(disciplina => {
           this.confirmarDisciplinasCampos.push(
             {
               descricao: disciplina.descricao,
@@ -98,12 +100,12 @@ export class TurmaConfirmarComponent implements OnChanges {
     )
   }
 
-  private prencherAlunosView(novaTurma: Turma) {
+  private prencherAlunosView(novaTurma: Turma): void {
     this.confirmarAlunosCampos = [];
 
     this.turmaFormService.obterAluno().subscribe(
       pipe((response: Aluno[]) => {
-        this.filtrarArray(response, novaTurma.alunos).map(aluno => {
+        this.listService.filtrarAlunos(response, novaTurma.alunos).map(aluno => {
           this.confirmarAlunosCampos.push(
             {
               nome: aluno.nome,
@@ -118,13 +120,6 @@ export class TurmaConfirmarComponent implements OnChanges {
     );
   }
 
-  private filtrarArray(arrayReturn: any[], arrayWithId: number[]): any[] {
-    return arrayReturn.filter(element => {
-      if ((arrayWithId.find(id => id == element.id))) {
-        return element;
-      }
-    });
-  }
 }
 
 type etapasType = 'step1' | 'step2' | 'step3' | 'step4';

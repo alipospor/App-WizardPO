@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /* Import */
-import { BaseHttpService } from 'src/app/core/services/base-http.service';
+import { BaseHttpService } from 'src/app/core/services/http/base/base-http.service';
 
 /* Interfaces */
 import { Professor } from 'src/app/core/interfaces/professor.interface';
@@ -24,6 +24,10 @@ export class TurmaFormService extends BaseHttpService {
 
   obterProfessor(): Observable<Professor[]> {
     return this.http.get<Professor[]>(`${this.URL_API}/professores`);
+  }
+
+  obterProfessorId(professorId: number): Observable<Professor> {
+    return this.http.get<Professor>(`${this.URL_API}/professores?id=${professorId}`)
   }
 
   cadastraProfessor(novoProfessor: Professor) {

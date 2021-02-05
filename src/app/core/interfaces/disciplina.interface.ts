@@ -6,5 +6,3 @@ export interface Disciplina {
     turma: number[],
     id?: number
 }
-
-/* Uma disciplina é ministrada por um professor em uma turma e possui uma carga horária.  */

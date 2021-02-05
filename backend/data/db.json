@@ -57,7 +57,7 @@
       "nome": "Alisson Cleverson",
       "email": "ali_cleverson@hotmailcom",
       "cpf": "077.603.609-05",
-      "matricula": "1003",
+      "matricula": 1003,
       "formaIngresso": "VESTIBULAR",
       "turma": "null",
       "id": 3

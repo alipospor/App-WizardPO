@@ -1,10 +1,10 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing'
 import { Professor } from 'src/app/core/interfaces/professor.interface';
-import { ModalsService } from './modals.service'
+import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
 
 describe('modals.service.ts | ModalsService', () => {
-    let service: ModalsService;
+    let service: TurmaFormService;
     let httpMock: HttpTestingController;
 
     const professorTeste = {
@@ -20,10 +20,10 @@ describe('modals.service.ts | ModalsService', () => {
                 HttpClientTestingModule
             ],
             providers: [
-                ModalsService
+                TurmaFormService
             ]
         });
-        service = TestBed.inject(ModalsService);
+        service = TestBed.inject(TurmaFormService);
         httpMock = TestBed.inject(HttpTestingController);
     });
 

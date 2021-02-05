@@ -6,8 +6,8 @@ import { PoMultiselectOption, PoPopupAction, PoSelectOption } from '@po-ui/ng-co
 
 /* imports */
 import { FormularioStepBase } from 'src/app/core/components/turma-form/formulario-step-base';
-import { TurmaFormService } from '../turma-form.service';
-import { FormaIngressoEnum } from 'src/app/core/commons/formaIngresso.enum';
+import { TurmaFormService } from '../../../core/services/http/turma-form.service';
+import { FormaIngressoEnum } from 'src/app/core/commons/enums/formaIngresso.enum';
 import { Aluno } from 'src/app/core/interfaces/aluno.interface';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
 
@@ -67,7 +67,8 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
       matricula: '',
       formaIngresso: undefined,
       turma: ["null"]
-    })
+    });
+    this.alunoForm.reset();
   }
 
   public prencherOptionsAluno(): void {
@@ -94,11 +95,11 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
 
   public cadastraAluno(): void {
     let novoAluno = this.alunoForm.getRawValue() as Aluno;
-    let matricula = novoAluno.matricula;
 
-    if (!matricula) {
+    if (!novoAluno.matricula) {
       novoAluno.matricula = this.gerarMatricula(true);
     }
+
     this.turmaFormService.cadastraAluno(novoAluno)
       .subscribe(
         () => {

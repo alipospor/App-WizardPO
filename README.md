@@ -1,27 +1,25 @@
-# WizardPO
+# App-WizardPO
+Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 11.0.5.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
+## Executando projeto
+ - Abra a pasta raiz do projeto `/app-wizardpo` e execute `npm install`;
+ - Abra a pasta do servidor `/backend` e execute `npm install`;
 
-## Development server
+### Servidor backend
+Entre na pasta raiz do projeto e va até a pasta `/backend` e execute o comando `npm start` com isso, assim que o processo for concluído o servidor do backend estara disponivel na rota `http://localhost:3000/`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Servidor frontend
+Entre na pasta raiz do projeto `/app-wizardpo` e execute o comando: `ng serve`   assim que o processo for concluído.  Navegue até a rota `http://localhost:4200/` do seu Navegador.
 
-## Code scaffolding
+## Observação
+Para que o projeto funcione ambos os servidores precisam estar em tempo de execução.
+___
+## Testes
+Testes unitarios e testes e2e (end-to-end) devem ser executado na pasta raiz do projeto `/app-wizardpo`.
+### Executando unit testes
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Execute `ng test` para executar os unit tests (testes de unidade) via [Karma](https://karma-runner.github.io).
 
-## Build
+### Executando end-to-end testes
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Execute `ng e2e` para executar os end-to-end tests (testes de ponta a aponta) via [Protractor](http://www.protractortest.org/).
