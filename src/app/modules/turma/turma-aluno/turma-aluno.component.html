@@ -1,74 +1,79 @@
-<div class="po-mt-5">
-    <article [formGroup]="componentForm">
-        <div class="po-row">
-            <po-multiselect class="po-sm-12 po-md-11" 
-                p-label="Alunos" 
-                name="alunos" 
-                p-sort="true"
-                [p-options]="optionsAlunos" 
-                formControlName="alunos"
-                p-required>
-            </po-multiselect>
-        </div>
-    </article>
+<div class="po-mt-sm-2 po-mt-md-5 po-mt-lg-5 po-mt-xl-5">
+    <div>
+        <article [formGroup]="componentForm">
+            <div class="po-row">
+                <po-multiselect class="po-xl-12 po-lg-12 po-sm-12 po-md-12" 
+                    p-label="Alunos" 
+                    name="alunos" 
+                    p-sort="true"
+                    [p-options]="optionsAlunos" 
+                    formControlName="alunos"
+                    p-required>
+                </po-multiselect>
+            </div>
+        </article>
+    </div>
     <po-divider class="po-mt-5" p-label="Cadastro Aluno"></po-divider>
-    <form [formGroup]="alunoForm">
-        <div class="po-row">
-            <div class="po-md-3">
-                <po-input p-label="Nome"
-                    formControlName="nome"
-                    p-minlength="10"
-                    p-maxlength="40"
-                    p-required
-                    p-error-pattern="Mín 10 caracteres">
-                </po-input>
+    <div>
+        <form [formGroup]="alunoForm">
+            <div class="po-row">
+                <div class="po-xl-3 po-lg-3 po-sm-12 po-md-3">
+                    <po-input p-label="Nome"
+                        formControlName="nome"
+                        p-minlength="10"
+                        p-maxlength="40"
+                        p-required
+                        p-error-pattern="Mín 10 caracteres">
+                    </po-input>
+                </div>
+                <div class="po-xl-3 po-lg-3 po-sm-12 po-md-3">
+                    <po-email 
+                        p-label="E-mail" 
+                        formControlName="email"
+                        p-required>
+                    </po-email>
+                </div>
+                <div class="po-xl-2 po-lg-2 po-sm-12 po-md-2">
+                    <po-input p-label="CPF" 
+                        formControlName="cpf" 
+                        p-mask="999.999.999-99" 
+                        p-mask-format-model
+                        p-minlength="14"
+                        p-required>
+                    </po-input>
+                </div>
+                <div class="po-xl-2 po-lg-2 po-sm-12 po-md-2" #target>
+                    <po-number p-label="Matricula" 
+                        formControlName="matricula"
+                        (p-enter)="popup.toggle()"
+                        p-optional="true"
+                    >
+                    </po-number>
+                    <po-popup #popup 
+                        [p-actions]="acoesPopup"
+                        [p-target]="targetInputRef"
+                        p-position="bottom">  
+                    </po-popup>
+                </div>
+                <div class="po-xl-2 po-lg-2 po-sm-12 po-md-2">
+                    <po-select
+                        name="formaIngresso"
+                        p-label="Forma Ingresso"
+                        formControlName="formaIngresso"
+                        p-required
+                        [p-options]="optionsFormaIngresso()"
+                    >
+                    </po-select>
+                </div>
             </div>
-            <div class="po-md-3">
-                <po-email 
-                    p-label="E-mail" 
-                    formControlName="email"
-                    p-required>
-                </po-email>
+            <div class="po-row center-align po-mt-sm-2 po-mt-md-3 po-mt-lg-3 po-mt-xl-3">
+                <po-button class="po-xl-4 po-lg-4 po-sm-12 po-md-4" 
+                    id="inserirAluno"
+                    [p-disabled]="alunoForm.invalid" 
+                    p-label="Cadastrar"
+                    (p-click)="cadastraAluno()"
+                ></po-button>
             </div>
-            <div class="po-md-2">
-                <po-input p-label="CPF" 
-                    formControlName="cpf" 
-                    p-mask="999.999.999-99" 
-                    p-mask-format-model
-                    p-minlength="14"
-                    p-required>
-                </po-input>
-            </div>
-            <div class="po-md-2" #target>
-                <po-number p-label="Matricula" 
-                    formControlName="matricula"
-                    (p-enter)="popup.toggle()"
-                    p-optional="true"
-                >
-                </po-number>
-                <po-popup #popup 
-                    [p-actions]="acoesPopup"
-                    [p-target]="targetInputRef"
-                    p-position="bottom">  
-                </po-popup>
-            </div>
-            <div class="po-md-2">
-                <po-select
-                    name="formaIngresso"
-                    p-label="Forma Ingresso"
-                    formControlName="formaIngresso"
-                    p-required
-                    [p-options]="optionsFormaIngresso()"
-                >
-                </po-select>
-            </div>
-        </div>
-        <div class="po-row center-align">
-            <po-button class="po-sm-4" 
-                [p-disabled]="alunoForm.invalid" 
-                p-label="Cadastrar"
-                (p-click)="cadastraAluno()"
-            ></po-button>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>

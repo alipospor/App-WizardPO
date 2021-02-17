@@ -11,8 +11,9 @@ import { Disciplina } from 'src/app/core/interfaces/disciplina.interface';
 import { Turma } from 'src/app/core/interfaces/turma.interface';
 
 /* Services */
+import { ListService } from 'src/app/core/services/list/list.service';
 import { TurmaFormService } from '../../../core/services/http/turma-form.service';
-import { ListService } from 'src/app/core/services/http/list/list.service';
+import { etapasType } from 'src/app/core/commons/types/etapas.type';
 
 @Component({
   selector: 'app-confirmar-turma',
@@ -121,5 +122,3 @@ export class TurmaConfirmarComponent implements OnChanges {
   }
 
 }
-
-type etapasType = 'step1' | 'step2' | 'step3' | 'step4';

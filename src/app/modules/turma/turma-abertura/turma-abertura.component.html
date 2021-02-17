@@ -1,57 +1,43 @@
-<article class="po-mt-5" [formGroup]="componentForm">
-    <div class="po-row">
-
-        <po-datepicker-range class="po-md-4"
-            p-label="Ano Letivo"
-            formControlName="anoLetivo"
-            [p-literals]="customLiterals"
-            p-no-autocomplete
-            p-required
-        >
-        </po-datepicker-range>
-        <po-number class="po-md-2" 
-            p-label="Periodo Letivo"
-            formControlName="periodoLetivo"
-            p-min="1"
-            p-max="9"
-            p-maxlength="1"
-            p-clean
-            p-error-pattern="Tente algo entre 1 e 9"
-            p-required>
-        </po-number>
-        <po-number class="po-md-2" 
-            p-label="N° Vagas"
-            formControlName="numeroVagas"
-            p-min="1"
-            p-maxlength="2"
-            p-max="35"
-            p-clean
-            p-error-pattern="Tente algo entre 1 e 35"
-            p-required>
-        </po-number>
-        <po-input class="po-md-4" 
-            p-label="Descrição Turma" 
-            formControlName="descricao" 
-            p-maxlength="40"
-            p-minlength="10"
-            p-error-pattern="Mín 10 Caracteres"
-            p-clean
-            p-required>
-        </po-input>
-    </div>
-
-</article>
-
-
-
-
-        <!-- <label class="custom-label ">Ano Letivo</label>
+<div class="po-xl-12 po-lg-12 po-sm-12 po-md-12 po-mt-sm-2 po-mt-md-5 po-mt-lg-5 po-mt-xl-5">
+    <article [formGroup]="componentForm">
         <div class="po-row">
-            <po-datepicker class="po-md-2" 
-            p-clean>
-            </po-datepicker>
-
-            <po-datepicker class="po-md-2" 
-            p-clean>
-            </po-datepicker>
-        </div> -->
+            <po-datepicker-range class="po-xl-4 po-lg-4 po-sm-12 po-md-4"
+                p-label="Ano Letivo"
+                formControlName="anoLetivo"
+                [p-literals]="customLiterals"
+                p-no-autocomplete
+                p-required
+            >
+            </po-datepicker-range>
+            <po-number class="po-xl-2 po-lg-2 po-md-2 po-sm-12" 
+                p-label="Periodo Letivo"
+                formControlName="periodoLetivo"
+                p-min="1"
+                p-max="9"
+                p-maxlength="1"
+                p-clean
+                p-error-pattern="Tente algo entre 1 e 9"
+                p-required>
+            </po-number>
+            <po-number class="po-xl-2 po-lg-2 po-md-2 po-sm-12" 
+                p-label="N° Vagas"
+                formControlName="numeroVagas"
+                p-min="1"
+                p-maxlength="2"
+                p-max="35"
+                p-clean
+                p-error-pattern="Tente algo entre 1 e 35"
+                p-required>
+            </po-number>
+            <po-input class="po-xl-4 po-lg-4 po-md-4 po-sm-12" 
+                p-label="Descrição Turma" 
+                formControlName="descricao" 
+                p-maxlength="40"
+                p-minlength="10"
+                p-error-pattern="Mín 10 Caracteres"
+                p-clean
+                p-required>
+            </po-input>
+        </div>
+    </article>
+</div>

@@ -1,7 +1,6 @@
 <po-page-default 
     [p-title]="titulo"
     [p-actions]="configuracaoMenuAcoes()">
-
     <form [formGroup]="form">
         <po-stepper id="po-stepper" #poStepper
             (p-change-step)="controlarPasso($event)"
@@ -31,5 +30,4 @@
             </po-step>
         </po-stepper>
     </form>
-
 </po-page-default>

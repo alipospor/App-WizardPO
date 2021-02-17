@@ -40,6 +40,10 @@ export class TurmaPage {
         return $('#inserirDisciplina');
     }
 
+    get botaoInserirAluno(): ElementFinder {
+        return $('#inserirAluno');
+    }
+
     get modal(): ElementFinder {
         return this.pageObjects.modal;
     }
