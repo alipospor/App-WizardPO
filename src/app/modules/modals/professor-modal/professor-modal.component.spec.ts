@@ -1,12 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed, waitForAsync } from '@angular/core/testing'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { PoFieldModule, PoModalModule } from '@po-ui/ng-components';
 import { of, throwError } from 'rxjs';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
-import { ModalsService } from '../modals.service';
 import { ProfessorModalComponent } from './professor-modal.component'
 
 describe('professor-modal.component.ts | ProfessorModalComponent', () => {

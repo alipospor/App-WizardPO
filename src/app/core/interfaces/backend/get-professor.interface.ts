@@ -1,4 +1,4 @@
-export interface Professor {
+export interface IProfessor {
     id?: number,
     nome: string,
     email: string,

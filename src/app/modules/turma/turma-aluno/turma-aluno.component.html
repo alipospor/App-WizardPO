@@ -58,7 +58,8 @@
                     p-label="Forma Ingresso"
                     formControlName="formaIngresso"
                     p-required
-                    [p-options]="optionsFormaIngresso()"
+                    [p-options]="optionsFormaIngresso"
+                    [(ngModel)]="numeroSelect"
                 >
                 </po-select>
             </div>

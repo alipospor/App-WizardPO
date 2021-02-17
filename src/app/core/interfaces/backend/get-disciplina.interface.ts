@@ -1,4 +1,4 @@
-export interface Disciplina {
+export interface IDisciplina {
     id?: number
     descricao: string,
     sigla: string,

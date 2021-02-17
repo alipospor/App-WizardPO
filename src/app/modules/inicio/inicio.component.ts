@@ -8,7 +8,9 @@ import { TurmaTabela } from 'src/app/core/interfaces/tabela/turma-tabela.interfa
 import { TitleService } from 'src/app/core/services/title.service';
 
 /* Service */
-import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
+import { TurmaService } from 'src/app/core/services/http/turma/turma.service';
+import { AlunoService } from 'src/app/core/services/http/aluno/aluno.service';
+import { alunos } from 'backend/alunos/alunos.mock';
 
 @Component({
   selector: 'app-inicio',
@@ -17,7 +19,8 @@ import { TurmaFormService } from 'src/app/core/services/http/turma-form.service'
 })
 export class InicioComponent implements OnInit {
 
-  public itensListaTurma: TurmaTabela[] = []; 
+  public id: number;
+  public itensListaTurma: TurmaTabela[] = [];
 
   public readonly colunasTurma: PoTableColumn[] = [
     { property: 'id', label: 'Id', type: 'number' },
@@ -35,16 +38,18 @@ export class InicioComponent implements OnInit {
   }
 
   constructor(
-    private formTurmaService: TurmaFormService,
-    private titleService: TitleService
+    private titleService: TitleService,
+    private turmaService: TurmaService,
+    private alunoService: AlunoService
   ) { }
 
   ngOnInit(): void {
     this.prencherListaTurma();
+    this.alunoService.obterAlunos().subscribe(alunos => { console.log(alunos) })
   }
 
   public prencherListaTurma() {
-    this.formTurmaService.obterTurma()
+    this.turmaService.obterTurmas()
       .subscribe(turmas => {
         /* Manipulando a turma que voltou */
         turmas.map(turma => {

@@ -16,9 +16,12 @@ import { TurmaFormComponent } from './turma-form.component';
 import { TurmaRoutingModule } from './turma.routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ModalsModule } from '../modals/modals.module';
+import { AlunoService } from 'src/app/core/services/http/aluno/aluno.service';
+import { TurmaService } from 'src/app/core/services/http/turma/turma.service';
+import { DisciplinaService } from 'src/app/core/services/http/disciplina/disciplina.service';
+import { ProfessorService } from 'src/app/core/services/http/professor/professor.service';
 
 /* Services */
-import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
 
 @NgModule({
     declarations: [
@@ -49,7 +52,10 @@ import { TurmaFormService } from 'src/app/core/services/http/turma-form.service'
         ModalsModule
     ],
     providers: [
-        TurmaFormService
+        TurmaService,
+        AlunoService,
+        DisciplinaService,
+        ProfessorService
     ]
 })
 export class TurmaModule { }

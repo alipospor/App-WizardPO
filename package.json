@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "serve:backend": "ng serve --configuration=backend --poll=2000"
   },
   "private": true,
   "dependencies": {
@@ -23,8 +24,11 @@
     "@po-ui/ng-templates": "^3.14.0",
     "@po-ui/style": "^3.14.0",
     "@totvs/po-theme": "3.14.0",
+    "json.date-extensions": "^1.2.2",
+    "lodash-es": "^4.17.20",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "web-backend-api": "^1.0.3",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

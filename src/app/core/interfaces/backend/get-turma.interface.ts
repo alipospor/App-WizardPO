@@ -1,9 +1,9 @@
-export interface Turma {
+export interface ITurma {
     id?: number
     descricao: string,
     anoLetivo: {
-        start: Date,
-        end: Date
+        start: string,
+        end: string
     },
     periodoLetivo: number,
     numeroVagas: number,

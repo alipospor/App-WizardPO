@@ -9,8 +9,9 @@
             <po-step
                 id="step1"
                 p-label="Turma" 
-                [p-can-active-next-step]="ativaPasso.bind(this, etapaAbertura)">
-                <app-abertura-turma #etapaAbertura [componentForm]="form"></app-abertura-turma>
+                [p-can-active-next-step]="ativaPasso.bind(this, etapaAluno)">
+               <!--  <app-abertura-turma #etapaAbertura [componentForm]="form"></app-abertura-turma> -->
+               <app-aluno-turma #etapaAluno [componentForm]="form"></app-aluno-turma>
             </po-step>
             <po-step 
                 id="step2"

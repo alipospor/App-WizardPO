@@ -10,10 +10,10 @@ import { PoPageAction, PoStepperComponent } from '@po-ui/ng-components';
 import { Turma } from 'src/app/core/interfaces/turma.interface';
 
 /* Services */
-import { TurmaFormService } from '../../core/services/http/turma-form.service';
 import { TitleService } from 'src/app/core/services/title.service';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
-import { ListService } from 'src/app/core/services/http/list/list.service';
+import { ListService } from 'src/app/core/services/list.service';
+import { TurmaService } from 'src/app/core/services/http/turma/turma.service';
 
 @Component({
   selector: 'app-turma',
@@ -40,7 +40,7 @@ export class TurmaFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private turmaFormService: TurmaFormService,
+    private turmaService: TurmaService,
     private notificationHelper: NotificationMessageService,
     private titleService: TitleService,
     private listService: ListService
@@ -88,10 +88,10 @@ export class TurmaFormComponent implements OnInit {
   private efetuaCadastro(): void {
     const novaTurma = this.form.getRawValue() as Turma;
 
-    this.turmaFormService.cadastroTurma(novaTurma)
+    this.turmaService.cadastroTurma(novaTurma)
       .subscribe(
         (response: Turma) => {
-          this.atualizaCadastro(response);
+          /* this.atualizaCadastro(response); */
           this.notificationHelper.mensagemSucesso('Cadastro realizado com sucesso');
           this.cacelaCadastro();
         },
@@ -102,34 +102,34 @@ export class TurmaFormComponent implements OnInit {
       );
   }
 
-  private atualizaCadastro(dadosTurma: Turma): void {
-    forkJoin({
-      dadosAlunos: this.turmaFormService.obterAluno(),
-      dadosDisciplina: this.turmaFormService.obterDisciplina()
-    }).subscribe(({ dadosAlunos, dadosDisciplina }) => {
-
-      this.listService.filtrarAlunos(dadosAlunos, dadosTurma.alunos).map(aluno => {
-        aluno.turma = dadosTurma.id;
-        this.turmaFormService.atualizaAluno(aluno.id, aluno).pipe(
-          delay(350)
-        ).subscribe(
-          () => { },
-          err => { this.notificationHelper.mensagemErro('Ops! algo errado aconteceu com seu cadastro') }
-        )
-      })
-
-      this.listService.filtrarDisciplinas(dadosDisciplina, dadosTurma.disciplinas).map(disciplina => {
-        disciplina.turma.push(dadosTurma.id);
-        this.turmaFormService.atualizaDisciplina(disciplina.id, disciplina).pipe(
-          delay(350)
-        ).subscribe(
-          () => { },
-          err => { this.notificationHelper.mensagemErro('Ops! algo errado aconteceu com seu cadastro') }
-        );
-      });
-
-    });
-  }
+  /*  private atualizaCadastro(dadosTurma: Turma): void {
+     forkJoin({
+       dadosAlunos: this.turmaFormService.obterAluno(),
+       dadosDisciplina: this.turmaFormService.obterDisciplina()
+     }).subscribe(({ dadosAlunos, dadosDisciplina }) => {
+ 
+       this.listService.filtrarAlunos(dadosAlunos, dadosTurma.alunos).map(aluno => {
+         aluno.turma = dadosTurma.id;
+         this.turmaFormService.atualizaAluno(aluno.id, aluno).pipe(
+           delay(350)
+         ).subscribe(
+           () => { },
+           err => { this.notificationHelper.mensagemErro('Ops! algo errado aconteceu com seu cadastro') }
+         )
+       })
+ 
+       this.listService.filtrarDisciplinas(dadosDisciplina, dadosTurma.disciplinas).map(disciplina => {
+         disciplina.turma.push(dadosTurma.id);
+         this.turmaFormService.atualizaDisciplina(disciplina.id, disciplina).pipe(
+           delay(350)
+         ).subscribe(
+           () => { },
+           err => { this.notificationHelper.mensagemErro('Ops! algo errado aconteceu com seu cadastro') }
+         );
+       });
+ 
+     });
+   } */
 
   private cacelaCadastro(): void {
     this.stepAtual = 'step1';
