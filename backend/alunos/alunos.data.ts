@@ -24,7 +24,7 @@ dataService(collectionName, (dbService: IBackendService) => {
 
     dbService.addRequestInterceptor({
         method: 'POST',
-        path: 'api/alunos/cadastro',
+        path: 'api/alunos',
         collectionName: collectionName,
         applyToPath: 'complete',
         response: responseCriar,

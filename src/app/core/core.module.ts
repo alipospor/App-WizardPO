@@ -1,17 +1,10 @@
 import { NgModule } from '@angular/core';
-
-/* imports */
-import { FormularioStepBase } from './components/turma-form/formulario-step-base';
+import { environment } from '../../environments/environment.back';
 
 @NgModule({
-    declarations: [
-        FormularioStepBase
-    ],
-    imports: [
-
-    ],
-    exports: [
-        
-    ]
+  declarations: [],
+  imports: [
+    environment.webBackendApi.modulo.forFeature()
+  ]
 })
 export class CoreModule { }

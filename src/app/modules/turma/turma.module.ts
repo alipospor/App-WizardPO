@@ -20,7 +20,7 @@ import { AlunoService } from 'src/app/core/services/http/aluno/aluno.service';
 import { TurmaService } from 'src/app/core/services/http/turma/turma.service';
 import { DisciplinaService } from 'src/app/core/services/http/disciplina/disciplina.service';
 import { ProfessorService } from 'src/app/core/services/http/professor/professor.service';
-
+import { CoreModule } from "src/app/core/core.module";
 /* Services */
 
 @NgModule({
@@ -49,7 +49,8 @@ import { ProfessorService } from 'src/app/core/services/http/professor/professor
 
         TurmaRoutingModule,
         SharedModule,
-        ModalsModule
+        ModalsModule,
+        CoreModule,
     ],
     providers: [
         TurmaService,

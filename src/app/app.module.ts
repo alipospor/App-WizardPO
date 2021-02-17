@@ -13,7 +13,6 @@ import { TurmaModule } from './modules/turma/turma.module';
 import { AppRoutingModule } from './app.routing.module';
 import { AppWebBackendApiModule } from './backend/app-web-backend-api.module';
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -24,9 +23,8 @@ import { AppWebBackendApiModule } from './backend/app-web-backend-api.module';
     BrowserModule,
     BrowserAnimationsModule,
     PoModule,
-
-    RouterModule.forRoot([]),
     TurmaModule,
+    RouterModule.forRoot([]),
     AppWebBackendApiModule.forRoot()
   ],
   providers: [],

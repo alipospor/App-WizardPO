@@ -9,7 +9,7 @@ import { BaseHttpService } from '../base-http.service';
 })
 export class DisciplinaService extends BaseHttpService {
 
-  protected URL_API = "http://localhost:8080/api/disciplinas";
+  protected URL_API = 'http://localhost:8080/api/disciplinas';
 
   constructor(
     http: HttpClient

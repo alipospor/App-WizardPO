@@ -20,6 +20,28 @@ const config: BackendConfigArgs = {
     post204: false, // return the item in body after POST
     put204: false, // return the item in body after PUT
     pageEncapsulation: false,
+    postsToOtherMethod: [
+        {
+            otherMethod: 'PUT',
+            applyTo: 'urlSegment',
+            value: 'alterar'
+        },
+        {
+            otherMethod: 'PUT',
+            applyTo: 'urlSegment',
+            value: 'editar'
+        },
+        {
+            otherMethod: 'DELETE',
+            applyTo: 'urlSegment',
+            value: 'excluir'
+        },
+        {
+            otherMethod: 'DELETE',
+            applyTo: 'urlSegment',
+            value: 'deletar'
+        },
+    ],
 };
 setupBackend(config, { dbtype: 'indexdb' }).then(() => {
     platformBrowserDynamic().bootstrapModule(AppModule).then(

@@ -77,10 +77,9 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
 
   public prencherOptionsAluno(): void {
     this.alunoService.obterAlunos().subscribe(alunos =>
-      console.log(alunos)
-      /* this.optionsAlunos = alunos.map(aluno => (
-        { value: aluno.id, label: `${aluno.nome} (${aluno.formaIngresso})` }
-      )) */
+      alunos.map(aluno => (
+        this.optionsAlunos.push({ value: aluno.id, label: `${aluno.nome} (${aluno.formaIngresso})` })
+      ))
     )
   }
 

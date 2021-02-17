@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 /* PO UI */
 import { PoTableColumn } from '@po-ui/ng-components';
@@ -10,7 +10,6 @@ import { TitleService } from 'src/app/core/services/title.service';
 /* Service */
 import { TurmaService } from 'src/app/core/services/http/turma/turma.service';
 import { AlunoService } from 'src/app/core/services/http/aluno/aluno.service';
-import { alunos } from 'backend/alunos/alunos.mock';
 
 @Component({
   selector: 'app-inicio',

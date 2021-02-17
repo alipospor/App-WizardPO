@@ -9,7 +9,7 @@ import { BaseHttpService } from '../base-http.service';
 })
 export class AlunoService extends BaseHttpService {
 
-  protected URL_API = "http://localhost:8080/api/alunos";
+  protected URL_API = 'http://localhost:8080/api/alunos';
 
   constructor(
     http: HttpClient
@@ -22,7 +22,7 @@ export class AlunoService extends BaseHttpService {
   }
 
   obterAlunosSemTurma() {
-    return this.http.get<Aluno[]>(`${this.URL_API}/`);
+    return this.http.get<Aluno[]>(`${this.URL_API}`);
   }
 
   cadastroAluno(novoAluno: Aluno): Observable<Aluno> {
