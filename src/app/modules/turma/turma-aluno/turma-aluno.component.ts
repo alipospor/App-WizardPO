@@ -49,17 +49,17 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
 
   private gerarFormAluno(): void {
     this.alunoForm = this.FormBuilder.group({
-      nome: ['asddasdasdas', Validators.required],
-      email: ['ali@gmail.com', Validators.required],
-      cpf: ['111.111.111-11',
+      nome: ['', Validators.required],
+      email: ['', Validators.required],
+      cpf: ['',
         [
           Validators.required,
           Validators.minLength(14)
         ]
       ],
-      matricula: ['200'],
+      matricula: [''],
       formaIngresso: ['', Validators.required],
-      turma: ["null"]
+      turma: [null]
     })
   }
 
@@ -111,8 +111,8 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
       .subscribe(
         () => {
           this.notificationHelper.mensagemSucesso('Cadastro realizado com sucesso');
-          /* this.prencherOptionsAluno(); */
-          /* this.limparFormAluno(); */
+          this.prencherOptionsAluno();
+          this.limparFormAluno();
         },
         err => {
           console.log(err);

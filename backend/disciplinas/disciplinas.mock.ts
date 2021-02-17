@@ -1,8 +1,8 @@
-import { IDisciplina } from 'src/app/core/interfaces/backend/get-disciplina.interface';
+import { Disciplina } from 'src/app/core/interfaces/disciplina.interface';
 
 export const collectionName = 'disciplinas';
 
-export const disciplinas: IDisciplina[] = [
+export const disciplinas: Disciplina[] = [
     {
         id: 1,
         descricao: "Biologia",

@@ -11,10 +11,10 @@
       "path": "./tsconfig.mem.json"
     },
     {
-      "path": "./web-backend-api/tsconfig.lib.json"
+      "path": "src/app/backend/tsconfig.lib.json"
     },
     {
-      "path": "./web-backend-api/tsconfig.spec.json"
+      "path": "src/app/backend/tsconfig.spec.json"
     }
   ]
 }

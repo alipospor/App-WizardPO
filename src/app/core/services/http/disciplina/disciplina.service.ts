@@ -21,6 +21,10 @@ export class DisciplinaService extends BaseHttpService {
     return this.http.get<Disciplina[]>(this.URL_API, { params });
   }
 
+  atualizaDisciplina(disciplinaId: number, disciplina: Disciplina) {
+    return this.http.put<Disciplina>(`${this.URL_API}/${disciplinaId}`, disciplina);
+  }
+
   cadastraDisciplina(novaDisciplina: Disciplina) {
     return this.http.post<Disciplina>(this.URL_API, novaDisciplina);
   }

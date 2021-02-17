@@ -9,7 +9,7 @@ import { TitleService } from 'src/app/core/services/title.service';
 
 /* Service */
 import { TurmaService } from 'src/app/core/services/http/turma/turma.service';
-import { AlunoService } from 'src/app/core/services/http/aluno/aluno.service';
+import { DisciplinaService } from 'src/app/core/services/http/disciplina/disciplina.service';
 
 @Component({
   selector: 'app-inicio',
@@ -39,12 +39,11 @@ export class InicioComponent implements OnInit {
   constructor(
     private titleService: TitleService,
     private turmaService: TurmaService,
-    private alunoService: AlunoService
+    private disciplinaService: DisciplinaService
   ) { }
 
   ngOnInit(): void {
     this.prencherListaTurma();
-    this.alunoService.obterAlunos().subscribe(alunos => { console.log(alunos) })
   }
 
   public prencherListaTurma() {

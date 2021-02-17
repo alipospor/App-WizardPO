@@ -1,16 +1,13 @@
-import { IAluno } from 'src/app/core/interfaces/backend/get-aluno.interface';
+import { Aluno } from 'src/app/core/interfaces/aluno.interface';
 import { dataService, IBackendService, IInterceptorUtils, ResponseInterceptorFn } from 'web-backend-api';
 import { alunos, collectionName } from './alunos.mock';
 
 dataService(collectionName, (dbService: IBackendService) => {
 
     const responseCriar: ResponseInterceptorFn = (requisicao: IInterceptorUtils): any => {
-        const bodyAtual: IAluno = requisicao.body;
-
-        console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAA')
-        console.log(bodyAtual)
-
-        const novoBody: IAluno = {
+        const bodyAtual: Aluno = requisicao.body;
+        
+        const novoBody: Aluno = {
             nome: bodyAtual.nome,
             email: bodyAtual.email,
             cpf: bodyAtual.cpf,

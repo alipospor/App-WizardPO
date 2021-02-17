@@ -1,18 +1,37 @@
+import { Turma } from 'src/app/core/interfaces/turma.interface';
 import { dataService, IBackendService, IInterceptorUtils, ResponseInterceptorFn } from 'web-backend-api';
 import { collectionName, turmas } from './turmas.mock';
 
 dataService(collectionName, (dbService: IBackendService) => {
 
-    const responseCriar: ResponseInterceptorFn = (requisicao: IInterceptorUtils): any => {
-        console.log(requisicao.body);
+    const responseIncluir: ResponseInterceptorFn = (requisicao: IInterceptorUtils): any => {
+        const bodyAtual: Turma = requisicao.body as Turma;
+
+        const novoBody: Turma = {
+            descricao: bodyAtual.descricao,
+            anoLetivo: {
+                start: bodyAtual.anoLetivo.start,
+                end: bodyAtual.anoLetivo.end
+            },
+            periodoLetivo: bodyAtual.periodoLetivo,
+            numeroVagas: bodyAtual.numeroVagas,
+            disciplinas: bodyAtual.disciplinas,
+            alunos: bodyAtual.alunos,
+        };
+
+        /* let putAlunos: Aluno[];
+
+        let putDisciplinas: Disciplina[]; */
+
+        dbService.post$(collectionName, undefined, novoBody, requisicao.url)
     };
 
     dbService.addRequestInterceptor({
         method: 'POST',
-        path: 'api/turmas',
+        path: 'api/turmas/criar',
         collectionName: collectionName,
         applyToPath: 'complete',
-        response: responseCriar,
+        response: responseIncluir,
     });
 
     turmas.forEach((turma) => {

@@ -21,12 +21,11 @@ export class AlunoService extends BaseHttpService {
     return this.http.get<Aluno[]>(this.URL_API, { params });
   }
 
-  obterAlunosSemTurma() {
-    return this.http.get<Aluno[]>(`${this.URL_API}`);
+  atualizaAluno(alunoId: number, aluno: Aluno) {
+    return this.http.put<Aluno>(`${this.URL_API}/${alunoId}`, aluno);
   }
 
   cadastroAluno(novoAluno: Aluno): Observable<Aluno> {
-    console.log(this.URL_API, novoAluno)
     return this.http.post<Aluno>(this.URL_API, novoAluno);
   }
 

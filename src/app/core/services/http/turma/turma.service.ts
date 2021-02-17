@@ -21,11 +21,11 @@ export class TurmaService extends BaseHttpService {
     return this.http.get<Turma[]>(this.URL_API, { params });
   }
 
-  deletaTurma(turmaId: number) {
-    return this.http.delete<Turma>(`${this.URL_API}/${turmaId}`);
+  cadastroTurma(cadastroTurma: Turma) {
+    return this.http.post(`${this.URL_API}`, cadastroTurma);
   }
 
-  cadastroTurma(cadastroTurma: Turma) {
-    return this.http.post(this.URL_API, cadastroTurma);
+  deletaTurma(turmaId: number) {
+    return this.http.delete<Turma>(`${this.URL_API}/${turmaId}`);
   }
 }

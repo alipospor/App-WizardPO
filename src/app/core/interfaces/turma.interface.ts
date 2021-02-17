@@ -2,8 +2,8 @@ export interface Turma {
     id?: number
     descricao: string,
     anoLetivo: {
-        start: Date,
-        end: Date
+        start: any,
+        end: any
     },
     periodoLetivo: number,
     numeroVagas: number,

@@ -1,8 +1,8 @@
-import { IProfessor } from 'src/app/core/interfaces/backend/get-professor.interface';
+import { Professor } from 'src/app/core/interfaces/professor.interface';
 
 export const collectionName = 'professores';
 
-export const professores: IProfessor[] = [
+export const professores: Professor[] = [
     {
         id: 1,
         nome: "Chimbinha Rose",

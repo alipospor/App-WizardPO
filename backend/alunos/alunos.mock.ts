@@ -1,8 +1,8 @@
-import { IAluno } from 'src/app/core/interfaces/backend/get-aluno.interface';
+import { Aluno } from 'src/app/core/interfaces/aluno.interface';
 
 export const collectionName = 'alunos';
 
-export const alunos: IAluno[] = [
+export const alunos: Aluno[] = [
     {
         id: 1,
         nome: "João Frango",
