@@ -1,16 +1,18 @@
-import { Disciplina } from 'src/app/core/interfaces/disciplina.interface';
+import { IDisciplinaGet } from 'src/app/core/interfaces/backend/disciplina/disciplina-get.interface';
+import { turmas } from '../turmas/turmas.mock';
+import { professores } from '../professores/professores.mock';
 
 export const collectionName = 'disciplinas';
 
-export const disciplinas: Disciplina[] = [
+export const disciplinas: IDisciplinaGet[] = [
     {
         id: 1,
         descricao: "Biologia",
         sigla: "BIO",
         cargaHoraria: 2,
-        professor: 2,
+        professor: professores[1],
         turma: [
-            1
+            turmas[0]
         ],
     },
     {
@@ -18,9 +20,9 @@ export const disciplinas: Disciplina[] = [
         descricao: "Geografia",
         sigla: "GEO",
         cargaHoraria: 4,
-        professor: 4,
+        professor: professores[3],
         turma: [
-            1
+            turmas[0]
         ],
     },
     {
@@ -28,9 +30,9 @@ export const disciplinas: Disciplina[] = [
         descricao: "Português",
         sigla: "POR",
         cargaHoraria: 6,
-        professor: 3,
+        professor: professores[2],
         turma: [
-            1
+            turmas[0]
         ],
     },
     {
@@ -38,9 +40,9 @@ export const disciplinas: Disciplina[] = [
         descricao: "Música",
         sigla: "MUS",
         cargaHoraria: 3,
-        professor: 1,
+        professor: professores[0],
         turma: [
-            1
+            turmas[0]
         ],
     }
 ];

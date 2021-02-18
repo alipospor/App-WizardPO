@@ -1,8 +1,9 @@
-import { Aluno } from 'src/app/core/interfaces/aluno.interface';
+import { IAlunoGet } from 'src/app/core/interfaces/backend/alunos/aluno-get.interface';
+import { turmas } from '../turmas/turmas.mock';
 
 export const collectionName = 'alunos';
 
-export const alunos: Aluno[] = [
+export const alunos: IAlunoGet[] = [
     {
         id: 1,
         nome: "João Frango",
@@ -10,7 +11,7 @@ export const alunos: Aluno[] = [
         cpf: "000.000.000-10",
         matricula: 1001,
         formaIngresso: "ENADE",
-        turma: 1,
+        turma: turmas[0],
     },
     {
         id: 2,
@@ -28,7 +29,7 @@ export const alunos: Aluno[] = [
         cpf: "077.630.609-05",
         matricula: 2477,
         formaIngresso: "ENEM",
-        turma: 1,
+        turma: turmas[0],
     },
     {
         id: 4,
