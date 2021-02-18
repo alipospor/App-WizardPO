@@ -6,11 +6,11 @@
         [p-primary-action]="enviarForm"
         [p-secondary-action]="fecharModal"
     >
-
     <form [formGroup]="professorForm">
         <div class="po-col center-align">
             <div class="po-row center-align">
-                <po-input p-label="Nome" 
+                <po-input 
+                    p-label="Nome" 
                     formControlName="nome"
                     p-required>
                 </po-input>
@@ -23,7 +23,8 @@
                 </po-email>
             </div>
             <div class="po-row center-align" >
-                <po-input p-label="CPF"
+                <po-input 
+                    p-label="CPF"
                     formControlName="cpf"
                     p-mask="999.999.999-99"
                     p-mask-format-model
@@ -33,7 +34,8 @@
                 </po-input>
             </div>
             <div class="po-row center-align">
-               <po-select p-label="Titulação"
+               <po-select 
+                    p-label="Titulação"
                     formControlName="titulacao"
                     [p-options]="optionsTitulacao"
                     p-required

@@ -82,9 +82,6 @@ describe('turma.e2e-spec.ts | TurmaPage', () => {
         expect(await page.botoesAcao.last().getText()).toEqual('Salvar');
         expect(await page.botoesAcao.last().click());
 
-
-        /* Validar os dados da tela de confirmar */
-       /*  const divider =  */
     });
 
     it('deve permitir cadastrar disciplina', async () => {
@@ -184,7 +181,7 @@ describe('turma.e2e-spec.ts | TurmaPage', () => {
         expect(await nome.isPresent()).toBeTruthy();
         await nome.sendKeys('Professor Teste');
 
-        const email = professorModal.$('po-input[formControlName="email"] input');
+        const email = professorModal.$('po-email[formControlName="email"] input');
         expect(await email.isPresent()).toBeTruthy();
         await email.sendKeys('professor@teste.com.br');
 
@@ -204,5 +201,67 @@ describe('turma.e2e-spec.ts | TurmaPage', () => {
         expect(await professorAcoesModal.get(1).getText()).toEqual('Enviar');
         const botaoEnviar = professorAcoesModal.get(1);
         expect(await botaoEnviar.click());
+    });
+
+    it('deve permitir cadastrar aluno', async () => {
+        /* valida a quantidade de etapas */
+        expect(await page.etapas.count()).toEqual(4);
+
+        //Etapa 1
+        expect(await page.etapaTurma.isPresent()).toBeTruthy();
+
+        const anoLetivo = page.etapaTurma.$('po-datepicker-range[formControlName="anoLetivo"] input');
+        expect(await anoLetivo.isPresent()).toBeTruthy();
+        await anoLetivo.sendKeys('10/11/2020', '01/01/2023');
+
+        const periodoLetivo = page.etapaTurma.$('po-number[formControlName="periodoLetivo"] input');
+        expect(await periodoLetivo.isPresent()).toBeTruthy();
+        await periodoLetivo.sendKeys(3);
+
+        const numeroVagas = page.etapaTurma.$('po-number[formControlName="numeroVagas"] input');
+        expect(await numeroVagas.isPresent()).toBeTruthy();
+        await numeroVagas.sendKeys(1);
+
+        const descricao = page.etapaTurma.$('po-input[formControlName="descricao"] input');
+        expect(await descricao.isPresent()).toBeTruthy();
+        await descricao.sendKeys('Turma dos Testes');
+        /* Fim etapa (1) */
+        expect(await page.botoesAcao.get(1).click());
+
+        //Etapa 2
+        expect(await page.etapaDisciplina.isPresent()).toBeTruthy();
+        await page.preencherMultiSelect({
+            elementoPai: page.etapaDisciplina,
+            termo: 'disciplinas',
+            teclas: ['Bio', 'Por']
+        });
+        /* Fim etapa (2) */
+        expect(await page.botoesAcao.get(2).click());
+
+        //Etapa 3
+        expect(await page.etapaAluno.isPresent()).toBeTruthy();
+
+        /* Inserção de dados aluno */
+        const nome = page.etapaAluno.$('po-input[formControlName="nome"] input');
+        expect(await nome.isPresent()).toBeTruthy();
+        await nome.sendKeys('Aluno Teste');
+
+        const email = page.etapaAluno.$('po-email[formControlName="email"] input');
+        expect(await email.isPresent()).toBeTruthy();
+        await email.sendKeys('professor@teste.com.br');
+
+        const cpf = page.etapaAluno.$('po-input[formControlName="cpf"] input');
+        expect(await cpf.isPresent()).toBeTruthy();
+        await cpf.sendKeys('000.000.000-11');
+
+        await page.prencherSelect({
+            elementoPai: page.etapaAluno,
+            termo: 'formaIngresso',
+            teclas: []
+        });
+
+        expect(await page.botaoInserirAluno.isPresent()).toBeTruthy();
+        expect(await page.botaoInserirAluno.getText()).toEqual('Cadastrar');
+        expect(await page.botaoInserirAluno.click());
     });
 })

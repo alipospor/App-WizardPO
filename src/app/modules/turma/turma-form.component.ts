@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { delay } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
@@ -16,6 +16,8 @@ import { TurmaService } from 'src/app/core/services/http/turma/turma.service';
 import { AlunoService } from '../../core/services/http/aluno/aluno.service';
 import { DisciplinaService } from '../../core/services/http/disciplina/disciplina.service';
 import { ListService } from '../../core/services/list.service';
+import { etapasType } from 'src/app/core/commons/types/etapas.type';
+import { orientacaoStepper } from 'src/app/core/commons/types/orientacaoStepper.type';
 
 @Component({
   selector: 'app-turma',
@@ -24,8 +26,8 @@ import { ListService } from '../../core/services/list.service';
 export class TurmaFormComponent implements OnInit {
 
   @Output() public form: FormGroup;
-
   @Output() public stepAtual: etapasType = 'step1';
+  public orientacaoStepper: orientacaoStepper = 'horizontal';
 
   readonly visibilidadeButtonsStepper = {
     step1: { Cancelar: true, Anterior: false, Proximo: true, Salvar: false },
@@ -182,17 +184,15 @@ export class TurmaFormComponent implements OnInit {
           return this.form.controls[campo].valid
         }).every(valido => valido);
       case 'step2':
-        return this.form.controls['disciplinas'].valid ? false : true;
+        return !this.form.controls['disciplinas'].valid;
       case 'step3':
-        return this.form.controls['alunos'].valid ? false : true;
+        return !this.form.controls['alunos'].valid;
       default:
         return false;
     }
   }
 
   private disableBotaoSalvar(): boolean {
-    return (this.form.invalid) ? true : false;
+    return this.form.invalid;
   }
 }
-
-type etapasType = 'step1' | 'step2' | 'step3' | 'step4';

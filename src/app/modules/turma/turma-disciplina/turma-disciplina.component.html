@@ -1,9 +1,8 @@
-<div class="po-mt-5">
+<div class="po-mt-sm-2 po-mt-md-5 po-mt-lg-5 po-mt-xl-5">
     <article  [formGroup]="componentForm">
-
         <div class="po-row">
-            <div class="po-md-12">
-                <po-multiselect p-label="Disciplina" class="po-sm-12 po-md-11" 
+            <div class="po-xl-12 po-lg-12 po-sm-12 po-md-12">
+                <po-multiselect p-label="Disciplina"
                     name="disciplinas" 
                     formControlName="disciplinas"
                     [p-options]="optionsDisciplina" 
@@ -17,9 +16,8 @@
     <po-divider class="po-mt-5" p-label="Cadastro Disciplina"></po-divider>
     <div>
         <form [formGroup]="disciplinaForm">
-
             <div class="po-row">
-                <div class="po-md-3">
+                <div class="po-xl-3 po-lg-3 po-sm-12 po-md-3">
                     <po-input p-label="Descrição"
                         formControlName="descricao"
                         p-maxlength="30"
@@ -29,7 +27,7 @@
                         p-required>
                     </po-input>
                 </div>
-                <div class="po-md-2" #target>
+                <div class="po-xl-2 po-lg-2 po-sm-12 po-md-2" #target>
                     <po-input #inputSigla
                         p-label="Sigla"
                         formControlName="sigla"
@@ -47,7 +45,7 @@
                     >
                     </po-popup>
                 </div>
-                <div class="po-md-3">
+                <div class="po-xl-3 po-lg-3 po-sm-12 po-md-3">
                     <po-number p-label="Carga Horária"
                         formControlName="cargaHoraria"
                         p-min="1"
@@ -58,7 +56,7 @@
                         p-required>
                     </po-number>
                 </div>
-                <div class="po-md-4">
+                <div class="po-xl-4 po-lg-4 po-sm-12 po-md-4">
                     <app-novo-input label="Professor" padding="true" (openEvent)="abrirModal()"></app-novo-input>
                     <po-select
                         formControlName="professor"
@@ -68,14 +66,15 @@
                     </po-select>
                 </div>
             </div>
-            <div class="po-row center-align">
-                <po-button id="inserirDisciplina" class="po-sm-4" 
-                    [p-disabled]="disciplinaForm.invalid" 
-                    p-label="Cadastrar"
-                    (p-click)="cadastraDisciplina()"
+            <div class="po-row center-align po-mt-sm-2 po-mt-md-3 po-mt-lg-3 po-mt-xl-3">
+                    <po-button
+                        id="inserirDisciplina"
+                        class="po-xl-4 po-lg-4 po-sm-12 po-md-4"
+                        [p-disabled]="disciplinaForm.invalid" 
+                        p-label="Cadastrar"
+                        (p-click)="cadastraDisciplina()"
                 ></po-button>
             </div>
-
         </form>
     </div>
         <app-professor-modal #professorModal (callFunction)="prencherOptionsProfessor()"></app-professor-modal>
