@@ -2,10 +2,6 @@ import { Injectable } from '@angular/core';
 import { Aluno } from 'src/app/core/interfaces/aluno.interface';
 import { Disciplina } from 'src/app/core/interfaces/disciplina.interface';
 import { Professor } from 'src/app/core/interfaces/professor.interface';
-<<<<<<< HEAD:src/app/core/services/list.service.ts
-=======
-import { TurmaFormService } from '../http/turma-form.service';
->>>>>>> master:src/app/core/services/list/list.service.ts
 
 @Injectable({
   providedIn: 'root'

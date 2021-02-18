@@ -13,8 +13,8 @@ import { Turma } from 'src/app/core/interfaces/turma.interface';
 /* Services */
 import { DisciplinaService } from 'src/app/core/services/http/disciplina/disciplina.service';
 import { AlunoService } from 'src/app/core/services/http/aluno/aluno.service';
-import { ListService } from 'src/app/core/services/list/list.service';
 import { etapasType } from 'src/app/core/commons/types/etapas.type';
+import { ListService } from '../../../core/services/list.service';
 
 @Component({
   selector: 'app-confirmar-turma',
