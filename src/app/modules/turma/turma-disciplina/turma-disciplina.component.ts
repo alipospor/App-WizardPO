@@ -15,7 +15,8 @@ import { Professor } from 'src/app/core/interfaces/professor.interface';
 
 /* Modal */
 import { ProfessorModalComponent } from '../../modals/professor-modal/professor-modal.component';
-import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
+import { ProfessorService } from 'src/app/core/services/http/professor/professor.service';
+import { DisciplinaService } from 'src/app/core/services/http/disciplina/disciplina.service';
 
 @Component({
   selector: 'app-disciplina-turma',
@@ -39,7 +40,8 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
   }];
 
   constructor(
-    private turmaFormService: TurmaFormService,
+    private disciplinaService: DisciplinaService,
+    private professorService: ProfessorService,
     private formBuilder: FormBuilder,
     private notificationHelper: NotificationMessageService
   ) {
@@ -84,8 +86,8 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
 
   public prencherOptionsDisciplina(): void {
     forkJoin({
-      dadosDisciplina: this.turmaFormService.obterDisciplina(),
-      dadosProfessor: this.turmaFormService.obterProfessor()
+      dadosDisciplina: this.disciplinaService.obterDisciplinas(),
+      dadosProfessor: this.professorService.obterProfessores()
     }).subscribe(({ dadosDisciplina, dadosProfessor }) => {
 
       this.optionsDisciplina = dadosDisciplina.map(disciplina => {
@@ -103,7 +105,7 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
   }
 
   public prencherOptionsProfessor(): void {
-    this.turmaFormService.obterProfessor()
+    this.professorService.obterProfessores()
       .subscribe(professor => {
         this.optionsProfessor = professor.map(professor => (
           { label: professor.nome, value: professor.id }
@@ -127,7 +129,7 @@ export class TurmaDisciplinaComponent extends FormularioStepBase implements OnIn
     if (!novaDisciplina.sigla.length) {
       novaDisciplina.sigla = this.gerarSiglaDisciplina(true);
     }
-    this.turmaFormService.cadastraDisciplina(novaDisciplina)
+    this.disciplinaService.cadastraDisciplina(novaDisciplina)
       .subscribe(
         () => {
           this.notificationHelper.mensagemSucesso('Cadastro de disciplina realizado com sucesso')

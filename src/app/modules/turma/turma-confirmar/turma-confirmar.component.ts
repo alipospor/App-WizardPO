@@ -11,9 +11,10 @@ import { Disciplina } from 'src/app/core/interfaces/disciplina.interface';
 import { Turma } from 'src/app/core/interfaces/turma.interface';
 
 /* Services */
-import { ListService } from 'src/app/core/services/list/list.service';
-import { TurmaFormService } from '../../../core/services/http/turma-form.service';
+import { DisciplinaService } from 'src/app/core/services/http/disciplina/disciplina.service';
+import { AlunoService } from 'src/app/core/services/http/aluno/aluno.service';
 import { etapasType } from 'src/app/core/commons/types/etapas.type';
+import { ListService } from '../../../core/services/list.service';
 
 @Component({
   selector: 'app-confirmar-turma',
@@ -52,7 +53,8 @@ export class TurmaConfirmarComponent implements OnChanges {
   @Input() public componentForm: FormGroup;
 
   constructor(
-    private turmaFormService: TurmaFormService,
+    private disciplinaService: DisciplinaService,
+    private alunoService: AlunoService,
     private listService: ListService
   ) {
   }
@@ -85,7 +87,7 @@ export class TurmaConfirmarComponent implements OnChanges {
   private prencherDisciplinasTabela(novaTurma: Turma): void {
     this.confirmarDisciplinasCampos = [];
 
-    this.turmaFormService.obterDisciplina().subscribe(
+    this.disciplinaService.obterDisciplinas().subscribe(
       pipe((response: Disciplina[]) => {
         this.listService.filtrarDisciplinas(response, novaTurma.disciplinas).map(disciplina => {
           this.confirmarDisciplinasCampos.push(
@@ -104,7 +106,7 @@ export class TurmaConfirmarComponent implements OnChanges {
   private prencherAlunosView(novaTurma: Turma): void {
     this.confirmarAlunosCampos = [];
 
-    this.turmaFormService.obterAluno().subscribe(
+    this.alunoService.obterAlunos().subscribe(
       pipe((response: Aluno[]) => {
         this.listService.filtrarAlunos(response, novaTurma.alunos).map(aluno => {
           this.confirmarAlunosCampos.push(

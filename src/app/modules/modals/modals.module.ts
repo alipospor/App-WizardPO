@@ -9,7 +9,6 @@ import { PoFieldModule, PoModalModule } from '@po-ui/ng-components';
 import { ProfessorModalComponent } from './professor-modal/professor-modal.component';
 
 /* Services */
-import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 
@@ -31,7 +30,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ProfessorModalComponent
   ],
   providers: [
-    TurmaFormService,
     NotificationMessageService
   ]
 })

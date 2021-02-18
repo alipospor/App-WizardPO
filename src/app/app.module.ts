@@ -11,7 +11,7 @@ import { PoModule } from '@po-ui/ng-components';
 /* Modulos */
 import { TurmaModule } from './modules/turma/turma.module';
 import { AppRoutingModule } from './app.routing.module';
-
+import { AppWebBackendApiModule } from './backend/app-web-backend-api.module';
 
 @NgModule({
   declarations: [
@@ -23,9 +23,9 @@ import { AppRoutingModule } from './app.routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     PoModule,
-
+    TurmaModule,
     RouterModule.forRoot([]),
-    TurmaModule
+    AppWebBackendApiModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

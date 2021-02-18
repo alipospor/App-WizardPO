@@ -6,10 +6,10 @@ import { PoMultiselectOption, PoPopupAction, PoSelectOption } from '@po-ui/ng-co
 
 /* imports */
 import { FormularioStepBase } from 'src/app/core/components/turma-form/formulario-step-base';
-import { TurmaFormService } from '../../../core/services/http/turma-form.service';
 import { FormaIngressoEnum } from 'src/app/core/commons/enums/formaIngresso.enum';
 import { Aluno } from 'src/app/core/interfaces/aluno.interface';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
+import { AlunoService } from 'src/app/core/services/http/aluno/aluno.service';
 
 @Component({
   selector: 'app-aluno-turma',
@@ -22,6 +22,9 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
 
   public alunoForm: FormGroup;
   public optionsAlunos: PoMultiselectOption[] = [];
+  public optionsFormaIngresso: PoSelectOption[] = [];
+
+  public numeroSelect: number;
 
   @ViewChild('target', { read: ElementRef, static: true }) targetInputRef: ElementRef;
 
@@ -30,7 +33,7 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
   }];
 
   constructor(
-    private turmaFormService: TurmaFormService,
+    private alunoService: AlunoService,
     private FormBuilder: FormBuilder,
     private notificationHelper: NotificationMessageService
   ) {
@@ -40,6 +43,7 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.componentForm;
     this.prencherOptionsAluno();
+    this.preencheroptionsFormaIngresso();
     this.gerarFormAluno();
   }
 
@@ -55,7 +59,7 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
       ],
       matricula: [''],
       formaIngresso: ['', Validators.required],
-      turma: ["null"]
+      turma: [null]
     })
   }
 
@@ -72,16 +76,19 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
   }
 
   public prencherOptionsAluno(): void {
-    this.turmaFormService.obterAlunoSemTurma().subscribe(alunos =>
-      this.optionsAlunos = alunos.map(aluno => (
-        { value: aluno.id, label: `${aluno.nome} (${aluno.formaIngresso})` }
+    this.alunoService.obterAlunos().subscribe(alunos =>
+      alunos.map(aluno => (
+        this.optionsAlunos.push({ value: aluno.id, label: `${aluno.nome} (${aluno.formaIngresso})` })
       ))
     )
   }
 
-  public optionsFormaIngresso(): PoSelectOption[] {
-    return FormaIngressoEnum.values
-      .map(formaIngresso => { return formaIngresso })
+  public preencheroptionsFormaIngresso(): void {
+    this.optionsFormaIngresso = FormaIngressoEnum.values
+      .map(formaIngresso => {
+        return formaIngresso
+      });
+    this.numeroSelect = this.optionsFormaIngresso[0].value as number;
   }
 
   private gerarMatricula(precisaRetorno: boolean = false): number {
@@ -100,7 +107,7 @@ export class TurmaAlunoComponent extends FormularioStepBase implements OnInit {
       novoAluno.matricula = this.gerarMatricula(true);
     }
 
-    this.turmaFormService.cadastraAluno(novoAluno)
+    this.alunoService.cadastroAluno(novoAluno)
       .subscribe(
         () => {
           this.notificationHelper.mensagemSucesso('Cadastro realizado com sucesso');

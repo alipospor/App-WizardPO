@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 /* PO UI */
-import { PoButtonComponent, PoButtonModule } from '@po-ui/ng-components';
+import { PoButtonModule } from '@po-ui/ng-components';
 
 /* Components */
 import { NovoInputComponent } from './novo-input/novo-input.component';
@@ -11,11 +11,10 @@ import { NovoInputComponent } from './novo-input/novo-input.component';
 @NgModule({
   declarations: [
     NovoInputComponent,
-
   ],
   imports: [
     CommonModule,
-    PoButtonModule
+    PoButtonModule,
   ],
   exports: [
     NovoInputComponent

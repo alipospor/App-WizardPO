@@ -1,10 +1,10 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing'
 import { Professor } from 'src/app/core/interfaces/professor.interface';
-import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
+import { ProfessorService } from 'src/app/core/services/http/professor/professor.service';
 
 describe('modals.service.ts | ModalsService', () => {
-    let service: TurmaFormService;
+    let service: ProfessorService;
     let httpMock: HttpTestingController;
 
     const professorTeste = {
@@ -20,10 +20,10 @@ describe('modals.service.ts | ModalsService', () => {
                 HttpClientTestingModule
             ],
             providers: [
-                TurmaFormService
+                ProfessorService
             ]
         });
-        service = TestBed.inject(TurmaFormService);
+        service = TestBed.inject(ProfessorService);
         httpMock = TestBed.inject(HttpTestingController);
     });
 
@@ -45,7 +45,7 @@ describe('modals.service.ts | ModalsService', () => {
             professorTeste
         ] as Professor[];
 
-        service.obterProfessor().subscribe(professores => {
+        service.obterProfessores().subscribe(professores => {
             expect(professores).toEqual(professorEsperado);
         });
 

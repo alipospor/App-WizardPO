@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Aluno } from 'src/app/core/interfaces/aluno.interface';
 import { Disciplina } from 'src/app/core/interfaces/disciplina.interface';
 import { Professor } from 'src/app/core/interfaces/professor.interface';
-import { TurmaFormService } from '../http/turma-form.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,6 @@ import { TurmaFormService } from '../http/turma-form.service';
 export class ListService {
 
   constructor(
-    private turmaFormService: TurmaFormService
   ) { }
 
   public filtrarAlunos(dadosAlunos: Aluno[], arrayId: number[]): Aluno[] {

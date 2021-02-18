@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 /* PO UI */
 import { PoTableColumn } from '@po-ui/ng-components';
@@ -8,7 +8,8 @@ import { TurmaTabela } from 'src/app/core/interfaces/tabela/turma-tabela.interfa
 import { TitleService } from 'src/app/core/services/title.service';
 
 /* Service */
-import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
+import { TurmaService } from 'src/app/core/services/http/turma/turma.service';
+import { DisciplinaService } from 'src/app/core/services/http/disciplina/disciplina.service';
 
 @Component({
   selector: 'app-inicio',
@@ -17,7 +18,8 @@ import { TurmaFormService } from 'src/app/core/services/http/turma-form.service'
 })
 export class InicioComponent implements OnInit {
 
-  public itensListaTurma: TurmaTabela[] = []; 
+  public id: number;
+  public itensListaTurma: TurmaTabela[] = [];
 
   public readonly colunasTurma: PoTableColumn[] = [
     { property: 'id', label: 'Id', type: 'number' },
@@ -35,8 +37,9 @@ export class InicioComponent implements OnInit {
   }
 
   constructor(
-    private formTurmaService: TurmaFormService,
-    private titleService: TitleService
+    private titleService: TitleService,
+    private turmaService: TurmaService,
+    private disciplinaService: DisciplinaService
   ) { }
 
   ngOnInit(): void {
@@ -44,7 +47,7 @@ export class InicioComponent implements OnInit {
   }
 
   public prencherListaTurma() {
-    this.formTurmaService.obterTurma()
+    this.turmaService.obterTurmas()
       .subscribe(turmas => {
         /* Manipulando a turma que voltou */
         turmas.map(turma => {

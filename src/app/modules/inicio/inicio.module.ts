@@ -7,10 +7,7 @@ import { PoPageModule, PoTableModule } from '@po-ui/ng-components';
 /* Components */
 import { InicioComponent } from './inicio.component';
 import { InicioRoutingModule } from './inicio.routing.module';
-import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
-
-/* Services */
-
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   declarations: [
@@ -22,10 +19,8 @@ import { TurmaFormService } from 'src/app/core/services/http/turma-form.service'
     PoPageModule,
     PoTableModule,
 
-    InicioRoutingModule
-  ],
-  providers: [
-    TurmaFormService
+    InicioRoutingModule,
+    CoreModule
   ]
 })
 export class InicioModule { }

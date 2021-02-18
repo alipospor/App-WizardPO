@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PoModalAction, PoModalComponent, PoSelectOption } from '@po-ui/ng-components';
 
 /* Services */
-import { TurmaFormService } from 'src/app/core/services/http/turma-form.service';
+import { ProfessorService } from 'src/app/core/services/http/professor/professor.service';
 import { NotificationMessageService } from 'src/app/core/helpers/notification-message.service';
 
 /* Interface */
@@ -26,7 +26,7 @@ export class ProfessorModalComponent implements OnInit {
   @ViewChild('professorModal') private _poModal: PoModalComponent;
 
   constructor(
-    private turmaFormService: TurmaFormService,
+    private professorService: ProfessorService,
     private formBuilder: FormBuilder,
     public notificationHelper: NotificationMessageService
   ) { }
@@ -64,7 +64,7 @@ export class ProfessorModalComponent implements OnInit {
   public cadastraNovoProfessor(): void {
     const novoProfessor = this.professorForm.getRawValue() as Professor;
 
-    this.turmaFormService.cadastraProfessor(novoProfessor)
+    this.professorService.cadastraProfessor(novoProfessor)
       .subscribe(
         () => {
           this.notificationHelper.mensagemSucesso('Cadastro realizado com sucesso');
